@@ -12,7 +12,6 @@ jQuery.fn.orderBy = function(keySelector) {
   });
 };
 
-
 function updateWeather() {
   $.getJSON('/api/weather', function(data){
     //Current conditions
@@ -163,21 +162,22 @@ function updateBARTAdvisories(){
 
 
 function updateMUNI(){
-  //Define Muni Routes
-  // add to config with nconf.get
  var MUNIroutes = [
-    {
-      route: 12,
-      stop:4668,
-      direction: 'north',
-      destination: 'Folsom to Downtown and North Beach'
-    },
-    {
-      route: 12,
-      stop:4669,
-      direction: 'south',
-      destination: 'Folsom to 24th St'
-    }
+    { route: 5,     stop: 5689, direction: 'west' },
+    { route: "5L",  stop: 5689, direction: 'west' },
+    { route: 21,    stop: 5689, direction: 'west' },
+    { route: 31,    stop: 5689, direction: 'west' },
+    { route: 38,    stop: 5689, direction: 'west' },
+    { route: "38L", stop: 5689, direction: 'west' },
+    { route: 1,     stop: 6314, direction: 'west' },
+    { route: "N",   stop: 6994, direction: 'south' },
+    { route: "J",   stop: 6994, direction: 'south' },
+    { route: "KT",  stop: 6994, direction: 'south' },
+    { route: "L",   stop: 6994, direction: 'south' },
+    { route: "M",   stop: 6994, direction: 'south' },
+    { route: "30X", stop: 6326, direction: 'north' },
+    { route: 41,    stop: 6333, direction: 'north' },
+    { route: 10,    stop: 6327, direction: 'north' }
   ];
 
   var agency = '&a=' + 'sf-muni';
@@ -193,12 +193,15 @@ function updateMUNI(){
     url: url,
     dataType: 'xml',
     success:function(result){
-      // $($(result).find('predictions')[0]).find('prediction')[0]
       var predictions = $(result).find('predictions');
 
       predictions.each(function(i, p){
-        var prediction = $(p),
-            routeTag = prediction.attr('routeTag'),
+        var prediction = $(p);
+        if(prediction.attr('dirTitleBecauseNoPredictions')){
+          return true;
+        }
+
+        var routeTag = prediction.attr('routeTag'),
             stopTag = prediction.attr('stopTag'),
             directionTitle = prediction.find('direction').attr('title').split(" "),
             direction = directionTitle[0].toLowerCase(), // may be valuable to manually replace with cardinal dir
@@ -233,15 +236,17 @@ function updateMUNI(){
             .append($('<div>')
               .addClass('time')));
 
-        var idx = 0,
+        var results = 0,
+            idx = 0,
             len = times.length;
 
-        while (idx < 3 && idx < len){
+        while (results < 3 && idx < len){
           //Limit to 3 results, only show times less than 100, don't show results that are 0
           var time = times[idx],
               min = $(time).attr('minutes');
           if(min < 100 && min > 0){
-            $('.time', div).eq(idx).html(min);
+            $('.time', div).eq(results).html(min);
+            results++;
           }
           idx++;
         }
@@ -250,9 +255,8 @@ function updateMUNI(){
         div.toggle((times.length > 0));
       });
 
-      // sort by route
       $('.muniContainer').each(function(idx, muniContainer){
-        $('.muni', muniContainer).orderBy(function() {return +$('.nextbus', this).text();}).appendTo(muniContainer);
+        $('.muni', muniContainer).orderBy(function() {return $('.busnumber', this).text();}).appendTo(muniContainer);
       });
     }
   });
