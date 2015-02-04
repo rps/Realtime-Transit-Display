@@ -1,4 +1,4 @@
-var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
+var bartAPIKey = 'MW9S-E7SL-26DU-VV8V'; // need to change
 
 jQuery.fn.orderBy = function(keySelector) {
   return this.sort(function(a,b) {
@@ -419,20 +419,20 @@ $(document).ready(function(){
   setInterval(updateClock, 1000);
 
   //Get BART
-  updateBART();
-  setInterval(updateBART, 15000);
+  // updateBART();
+  // setInterval(updateBART, 15000);
 
   //Get MUNI
   updateMUNI()
   setInterval(updateMUNI, 15000);
 
   //Get Uber
-  updateUber();
-  setInterval(updateUber, 60000);
+  // updateUber();
+  // setInterval(updateUber, 60000);
 
   //Get weather every hour
-  updateWeather();
-  setInterval(updateWeather, 3600000);
+  // updateWeather();
+  // setInterval(updateWeather, 3600000);
 
   //Resize transit if needed
   resizeDepartures();
