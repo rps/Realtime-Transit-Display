@@ -163,7 +163,8 @@ function updateBARTAdvisories(){
 
 
 function updateMUNI(){
-  //Define Muni Roures
+  //Define Muni Routes
+  // add to config with nconf.get
  var MUNIroutes = [
     {
       route: 12,
@@ -176,97 +177,43 @@ function updateMUNI(){
       stop:4669,
       direction: 'south',
       destination: 'Folsom to 24th St'
-    },
-    {
-      route: 49,
-      stop:5551,
-      direction: 'north',
-      destination: 'Van Ness to Ft Mason'
-
-    },
-    {
-      route: 49,
-      stop:5552,
-      direction: 'south',
-      destination: 'Mission to Excelsior'
-    },
-    {
-      route: 14,
-      stop:5551,
-      direction: 'north',
-      destination: 'Mission to Transbay & Ferry Building'
-    },
-    {
-      route: 14,
-      stop:5552,
-      direction: 'south',
-      destination: 'Mission to Excelsior'
-    },
-    {
-      route: '14L',
-      stop:5551,
-      direction: 'north',
-      destination: 'Mission to Transbay Terminal'
-    },
-    {
-      route: '14L',
-      stop:5552,
-      direction: 'south',
-      destination: 'Mission to Excelsior'
-    },
-    {
-      route: 22,
-      stop:7289,
-      direction: 'north',
-      destination: 'Fillmore to Marina'
-    },
-    {
-      route: 22,
-      stop:3299,
-      direction: 'east',
-      destination: '16th St to Potrero Hill & Dogpatch'
-    },
-    {
-      route: 33,
-      stop:7289,
-      direction: 'west',
-      destination: '18th to the Haight & the Richmond'
-    },
-    {
-      route: 33,
-      stop:3299,
-      direction: 'south',
-      destination: 'Potrero to 25th St'
     }
   ];
 
-  var url = 'http://webservices.nextbus.com/service/publicXMLFeed',
-      callbackCount = 0;
+  var agency = '&a=' + 'sf-muni';
+
+  var url = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops' + agency;
 
   //Loop through all routes
   MUNIroutes.forEach(function(route) {
-    $.ajax({
-      url: url,
-      data: {
-        command: 'predictions',
-        a: 'sf-muni',
-        r: route.route,
-        s: route.stop
-      },
-      dataType: 'xml',
-      success:function(result){
-        var divName = 'muni' + route.route.toString().replace(/\s/g, '') + '_' + route.stop,
-            div = $('#'+ divName),
-            routeName = route.route.toString().replace(/\s\D+/g, "<span>$&</span>").replace(/(\d)(L)/g, "$1<span>$2</span>"),
-            predictions = $(result).find('prediction');
+    url += ('&stops=' + route.route + '|' + route.stop);
+  });
 
-        callbackCount++;
+  $.ajax({
+    url: url,
+    dataType: 'xml',
+    success:function(result){
+      // $($(result).find('predictions')[0]).find('prediction')[0]
+      var predictions = $(result).find('predictions');
+
+      predictions.each(function(i, p){
+        var prediction = $(p),
+            routeTag = prediction.attr('routeTag'),
+            stopTag = prediction.attr('stopTag'),
+            directionTitle = prediction.find('direction').attr('title').split(" "),
+            direction = directionTitle[0].toLowerCase(), // may be valuable to manually replace with cardinal dir
+            destination = directionTitle.splice(2).join(" ");
+
+        var divName = 'muni' + routeTag.replace(/\s/g, '') + '_' + stopTag,
+            div = $('#'+ divName),
+            routeName = routeTag.replace(/\s\D+/g, "<span>$&</span>").replace(/(\d)(L)/g, "$1<span>$2</span>"),
+            times = prediction.find('prediction');
 
         if(!div.length) {
           div = $('<div>')
             .addClass('muni')
             .attr('id', divName)
-            .appendTo('#muni-' + route.direction);
+            .appendTo('#muni-' + direction);
         }
         div
           .empty()
@@ -276,7 +223,7 @@ function updateMUNI(){
           .append($('<div>').addClass('destinationContainer')
             .append($('<div>')
               .addClass('rotate')
-              .html(route.destination)))
+              .html(destination)))
           .append($('<div>')
             .addClass('nextbus time'))
           .append($('<div>')
@@ -286,25 +233,28 @@ function updateMUNI(){
             .append($('<div>')
               .addClass('time')));
 
-        var idx = 0;
-        predictions.each(function(i, data){
+        var idx = 0,
+            len = times.length;
+
+        while (idx < 3 && idx < len){
           //Limit to 3 results, only show times less than 100, don't show results that are 0
-          if(idx < 3 && $(data).attr('minutes') < 100 && $(data).attr('minutes') > 0){
-            $('.time', div).eq(idx).html($(data).attr('minutes'));
-            idx++;
+          var time = times[idx],
+              min = $(time).attr('minutes');
+          if(min < 100 && min > 0){
+            $('.time', div).eq(idx).html(min);
           }
-        });
+          idx++;
+        }
 
         //hide if no predictions
-        div.toggle((predictions.length > 0));
+        div.toggle((times.length > 0));
+      });
 
-        if(callbackCount == MUNIroutes.length) {
-          $('.muniContainer').each(function(idx, muniContainer){
-            $('.muni', muniContainer).orderBy(function() {return +$('.nextbus', this).text();}).appendTo(muniContainer);
-          });
-        }
-      }
-    });
+      // sort by route
+      $('.muniContainer').each(function(idx, muniContainer){
+        $('.muni', muniContainer).orderBy(function() {return +$('.nextbus', this).text();}).appendTo(muniContainer);
+      });
+    }
   });
 }
 
