@@ -61,6 +61,12 @@ h3 {
   clear: both;
   margin: 2px 0 0 30px;
 }
+#muni-outbound {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 .muni .destinationContainer {
   width: 28.5px;
   height: 93.75px;
