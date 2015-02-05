@@ -45,6 +45,9 @@ h2 {
   box-sizing: border-box;
   letter-spacing: 1px;
 }
+#muni2 h2 {
+  width: 285.75px;
+}
 h3 {
   text-transform: uppercase;
 }
@@ -61,17 +64,17 @@ h3 {
   margin: 2px 0 0 30px;
 }
 .muni .destinationContainer {
-  width: 38px;
-  height: 125px;
+  width: 28.5px;
+  height: 93.75px;
   float: left;
   position: relative;
-  margin: 0 3px;
+  margin: 0 2.25px;
 }
 .muni .rotate {
-  width: 125px;
-  height: 38px;
-  font-size: 12px;
-  padding: 2px;
+  width: 93.75px;
+  height: 28.5px;
+  font-size: 9px;
+  padding: 1.5px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.1);
   position: absolute;
@@ -79,35 +82,35 @@ h3 {
   text-align: center;
 }
 .busnumber {
-  font-size: 60px;
+  font-size: 45px;
   float: left;
-  height: 125px;
-  width: 125px;
+  height: 93.75px;
+  width: 93.75px;
   text-align: center;
-  line-height: 125px;
+  line-height: 93.75px;
 }
 .nextbus {
-  font-size: 75px;
+  font-size: 56.25px;
   float: left;
-  height: 125px;
-  line-height: 125px;
-  width: 150px;
+  height: 93.75px;
+  line-height: 93.75px;
+  width: 112.5px;
   text-align: center;
   background: rgba(0,0,0,0.1);
 }
 .laterbuses {
   float: left;
-  height: 125px;
+  height: 93.75px;
   margin-left: 2px;
   background: rgba(0,0,0,0.1);
 }
 .laterbuses .time {
-  height: 61px;
-  width: 62.5px;
+  height: 45.75px;
+  width: 46.875px;
   text-align: center;
-  line-height: 62.5px;
+  line-height: 46.875px;
   margin: 0;
-  font-size: 20px;
+  font-size: 15px;
 }
 .laterbuses .time:first-child {
   border-bottom: 3px solid #2f363c;
@@ -242,11 +245,11 @@ h3 {
   width: 50px;
 }
 .rotate {
-  -webkit-transform: rotate(-90deg) translateY(38px);
-  -moz-transform: rotate(-90deg) translateY(38px);
-  -ms-transform: rotate(-90deg) translateY(38px);
-  -o-transform: rotate(-90deg) translateY(38px);
-  transform: rotate(-90deg) translateY(38px);
+  -webkit-transform: rotate(-90deg) translateY(28.5px);
+  -moz-transform: rotate(-90deg) translateY(28.5px);
+  -ms-transform: rotate(-90deg) translateY(28.5px);
+  -o-transform: rotate(-90deg) translateY(28.5px);
+  transform: rotate(-90deg) translateY(28.5px);
 
   /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
   -webkit-transform-origin: bottom left;
