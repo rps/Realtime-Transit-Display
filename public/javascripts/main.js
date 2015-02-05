@@ -160,7 +160,6 @@ function updateBARTAdvisories(){
   });
 };
 
-
 function updateMUNI(direction){
  var OutboundMUNIroutes = [
     { name: 5,     stop_id: 5689, direction: 'west' },
@@ -304,42 +303,6 @@ function natcmp(a, b) {
     return 0;
 }
 
-function updateUber() {
-  $.getJSON('/api/uber', function(data) {
-    $('.uberContainer .col1, .uberContainer .col2').empty();
-
-    if(data && data[0] && data[0].times) {
-      data[0].times.forEach(function(service, idx) {
-        var div = $('<div>')
-          .addClass('uber')
-          .attr('id', service.product_id)
-          .append($('<div>')
-            .addClass('serviceName')
-            .text(service.display_name))
-          .append($('<div>')
-            .addClass('time')
-            .text(Math.round(service.estimate / 60)));
-        if(idx < 2) {
-          div.appendTo('.uberContainer .col1');
-        } else {
-          div.appendTo('.uberContainer .col2');
-        }
-      });
-    }
-    if(data && data[1] && data[1].prices) {
-      data[1].prices.forEach(function(price, idx) {
-        if(price.surge_multiplier > 1) {
-          var html = price.display_name + ' <span>(' + price.surge_multiplier + 'x)</span>';
-          $('#' + price.product_id)
-            .addClass('surge')
-            .find('.serviceName')
-              .html(html);
-        }
-      });
-    }
-  });
-}
-
 function updateClock() {
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -406,17 +369,13 @@ $(document).ready(function(){
   //Update Clock
   setInterval(updateClock, 1000);
 
-  //Get BART
-  // updateBART();
+  // Get BART
+  updateBART();
   // setInterval(updateBART, 15000);
 
   //Get MUNI
   updateMUNI()
   // setInterval(updateMUNI, 15000);
-
-  //Get Uber
-  // updateUber();
-  // setInterval(updateUber, 60000);
 
   //Get weather every hour
   // updateWeather();
