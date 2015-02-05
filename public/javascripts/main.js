@@ -161,8 +161,8 @@ function updateBARTAdvisories(){
 };
 
 
-function updateMUNI(){
- var MUNIroutes = [
+function updateMUNI(direction){
+ var OutboundMUNIroutes = [
     { route: 5,     stop: 5689, direction: 'west' },
     { route: "5L",  stop: 5689, direction: 'west' },
     { route: 21,    stop: 5689, direction: 'west' },
@@ -180,12 +180,25 @@ function updateMUNI(){
     { route: 10,    stop: 6327, direction: 'north' }
   ];
 
+  var InboundMUNIroutes = [
+    { route: "N",   stop: 5731, direction: 'east' },
+    { route: "J",   stop: 5731, direction: 'east' },
+    { route: "KT",  stop: 5731, direction: 'east' },
+    { route: "L",   stop: 5731, direction: 'east' },
+    { route: "M",   stop: 5731, direction: 'east' }
+  ]
+
+  var dir = {
+    inbound: InboundMUNIroutes,
+    outbound: OutboundMUNIroutes
+  }[direction] || OutboundMUNIroutes.concat(InboundMUNIroutes);
+
   var agency = '&a=' + 'sf-muni';
 
   var url = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops' + agency;
 
   //Loop through all routes
-  MUNIroutes.forEach(function(route) {
+  OutboundMUNIroutes.forEach(function(route) {
     url += ('&stops=' + route.route + '|' + route.stop);
   });
 
