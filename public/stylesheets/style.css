@@ -284,3 +284,251 @@ word-spacing:inherit !important;
 {
 display:block;
 }
+
+/* MUNI-provided route colors */
+#muni_1 .busnumber {
+  background: #cc6600;
+}
+#muni_2 .busnumber {
+  background: #000000;
+}
+#muni_3 .busnumber {
+  background: #339999;
+}
+#muni_5 .busnumber {
+  background: #666699;
+}
+#muni_6 .busnumber {
+  background: #996699;
+}
+#muni_9 .busnumber {
+  background: #889944;
+}
+#muni_10 .busnumber {
+  background: #b07d00;
+}
+#muni_12 .busnumber {
+  background: #b07d00;
+}
+#muni_14 .busnumber {
+  background: #339999;
+}
+#muni_17 .busnumber {
+  background: #003399;
+}
+#muni_18 .busnumber {
+  background: #996699;
+}
+#muni_19 .busnumber {
+  background: #000000;
+}
+#muni_21 .busnumber {
+  background: #660000;
+}
+#muni_22 .busnumber {
+  background: #ff6633;
+}
+#muni_23 .busnumber {
+  background: #b07d00;
+}
+#muni_24 .busnumber {
+  background: #996699;
+}
+#muni_27 .busnumber {
+  background: #660099;
+}
+#muni_28 .busnumber {
+  background: #000000;
+}
+#muni_29 .busnumber {
+  background: #ff6633;
+}
+#muni_30 .busnumber {
+  background: #990099;
+}
+#muni_31 .busnumber {
+  background: #339999;
+}
+#muni_33 .busnumber {
+  background: #660000;
+}
+#muni_35 .busnumber {
+  background: #ff6633;
+}
+#muni_36 .busnumber {
+  background: #003399;
+}
+#muni_37 .busnumber {
+  background: #000000;
+}
+#muni_38 .busnumber {
+  background: #ff6633;
+}
+#muni_39 .busnumber {
+  background: #ff6633;
+}
+#muni_41 .busnumber {
+  background: #b07d00;
+}
+#muni_43 .busnumber {
+  background: #006633;
+}
+#muni_44 .busnumber {
+  background: #ff6633;
+}
+#muni_45 .busnumber {
+  background: #006633;
+}
+#muni_47 .busnumber {
+  background: #667744;
+}
+#muni_48 .busnumber {
+  background: #cc6600;
+}
+#muni_49 .busnumber {
+  background: #b07d00;
+}
+#muni_52 .busnumber {
+  background: #889944;
+}
+#muni_54 .busnumber {
+  background: #cc0033;
+}
+#muni_55 .busnumber {
+  background: #cc0033;
+}
+#muni_56 .busnumber {
+  background: #990099;
+}
+#muni_59 .busnumber {
+  background: #cc3399;
+}
+#muni_60 .busnumber {
+  background: #4444a4;
+}
+#muni_61 .busnumber {
+  background: #9ac520;
+}
+#muni_66 .busnumber {
+  background: #666699;
+}
+#muni_67 .busnumber {
+  background: #555555;
+}
+#muni_71 .busnumber {
+  background: #667744;
+}
+#muni_88 .busnumber {
+  background: #555555;
+}
+#muni_90 .busnumber {
+  background: #660000;
+}
+#muni_91 .busnumber {
+  background: #667744;
+}
+#muni_108 .busnumber {
+  background: #555555;
+}
+#muni_F .busnumber {
+  background: #555555;
+}
+#muni_J .busnumber {
+  background: #cc6600;
+}
+#muni_KT .busnumber {
+  background: #cc0033;
+}
+#muni_L .busnumber {
+  background: #660099;
+}
+#muni_M .busnumber {
+  background: #006633;
+}
+#muni_N .busnumber {
+  background: #003399;
+}
+#muni_NX .busnumber {
+  background: #006633;
+}
+#muni_1AX .busnumber {
+  background: #990000;
+}
+#muni_1BX .busnumber {
+  background: #cc3333;
+}
+#muni_5L .busnumber {
+  background: #666699;
+}
+#muni_8X .busnumber {
+  background: #996699;
+}
+#muni_8AX .busnumber {
+  background: #996699;
+}
+#muni_8BX .busnumber {
+  background: #996699;
+}
+#muni_9L .busnumber {
+  background: #889944;
+}
+#muni_14L .busnumber {
+  background: #009900;
+}
+#muni_14X .busnumber {
+  background: #cc0033;
+}
+#muni_16X .busnumber {
+  background: #cc0033;
+}
+#muni_28L .busnumber {
+  background: #009900;
+}
+#muni_30X .busnumber {
+  background: #cc0033;
+}
+#muni_31AX .busnumber {
+  background: #990000;
+}
+#muni_31BX .busnumber {
+  background: #cc3333;
+}
+#muni_38AX .busnumber {
+  background: #990000;
+}
+#muni_38BX .busnumber {
+  background: #cc3333;
+}
+#muni_38L .busnumber {
+  background: #009900;
+}
+#muni_71L .busnumber {
+  background: #009900;
+}
+#muni_76X .busnumber {
+  background: #009900;
+}
+#muni_81X .busnumber {
+  background: #cc0033;
+}
+#muni_82X .busnumber {
+  background: #cc0033;
+}
+#muni_83X .busnumber {
+  background: #cc0033;
+}
+#muni_K_OWL .busnumber {
+  background: #198080;
+}
+#muni_L_OWL .busnumber {
+  background: #330066;
+}
+#muni_M_OWL .busnumber {
+  background: #004d19;
+}
+#muni_N_OWL .busnumber {
+  background: #001980;
+}
+#muni_T_OWL .busnumber {
+  background: #660019;
+}
