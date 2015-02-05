@@ -110,6 +110,7 @@ h3 {
   width: 125px;
   text-align: center;
   line-height: 125px;
+  border-radius: 50%;
 }
 .nextbus {
   font-size: 75px;
