@@ -370,6 +370,7 @@ $(document).ready(function(){
   $(window).bind("resize", resizeWindow);
 
   //Update Clock
+  updateClock();
   setInterval(updateClock, 1000);
 
   // Get BART
