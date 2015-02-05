@@ -18,7 +18,6 @@ header {
   height: 100%;
 }
 #main .grid-three {
-  width: 33.333%;
   min-width: 415px;
   float: left;
   min-height: 20px;
@@ -26,40 +25,66 @@ header {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: flex-start;
 }
 #main .grid-three:nth-of-type(1) {
+  width: 25%;
   border-top: 3px solid rgb(222, 0, 255);
+  padding: 0 1px 0 0;
 }
 #main .grid-three:nth-of-type(2) {
+  width: 50%;
   border-top: 3px solid rgb(0, 255, 36);
+  padding: 0 1px;
 }
 #main .grid-three:nth-of-type(3) {
+  width: 25%;
   border-top: 3px solid rgb(0, 180, 255);
+  padding: 0 0 0 1px;
+}
+.bartContainer, .muniContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+.muniContainer {
+  height: 900px;
 }
 h2 {
   text-transform: uppercase;
-  margin: 20px 0 0 30px;
+  text-align: center;
+  font-size: 2em;
+  margin: 7px 0 4px 0;
   background: rgba(0, 0, 0, 0.1);
-  width: 381px;
+  width: 100%;
   padding: 0 4px;
   box-sizing: border-box;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 h3 {
   text-transform: uppercase;
 }
-.muniContainer,
-.bartContainer,
-.uberContainer {
+/*.muniContainer,
+.bartContainer {
   overflow: hidden;
-}
+}*/
 .muni,
-.bart,
-.uber {
+.bart {
   float: left;
   clear: both;
-  margin: 2px 0 0 30px;
+  margin: 2px 20px 0 20px;
 }
+/*.muni {
+  margin-right: 50px;
+} */
+/*.bart {
+  margin-left: 50px;
+}*/
 .muni .destinationContainer {
   width: 38px;
   height: 125px;
@@ -85,6 +110,7 @@ h3 {
   width: 125px;
   text-align: center;
   line-height: 125px;
+  border-radius: 50%;
 }
 .nextbus {
   font-size: 75px;
@@ -138,6 +164,7 @@ h3 {
   font-size: 24px;
   text-align: center;
   position: relative;
+  border-radius: 20px 0px 0px 20px;
 }
 .bart .nextbus,
 .bart .laterbuses {
@@ -148,103 +175,41 @@ h3 {
   height: 49px;
   line-height: 50px;
 }
-#muni12_4669 .busnumber,
-#muni12_4668 .busnumber {
-  background: #b304a9;
-}
-#muni49_5552 .busnumber,
-#muni49_5551 .busnumber {
-  background: #00b77d;
-}
-#muni14_5552 .busnumber,
-#muni14_5551 .busnumber,
-#muni14L_5552 .busnumber,
-#muni14L_5551 .busnumber{
-  background: #dca102;
-}
-#muni22_3299 .busnumber,
-#muni22_7289 .busnumber {
-  background: #0f6fb9;
-}
-#muni33_3299 .busnumber,
-#muni33_7289 .busnumber {
-  background: #b4304f;
-}
-
-#uber .col1,
-#uber .col2 {
-  float: left;
-  width: 49%;
-}
-
-.uber {
-  background: rgba(0, 0, 0, 0.1);
-  height: 40px;
-  border-bottom: 3px solid #2f363c;
-}
-
-.uber .serviceName {
-  width: 100px;
-  display: inline-block;
-  line-height: 40px;
-  font-size: 18px;
-  height: 40px;
-  padding-left: 5px;
-  border-right: 3px solid #2f363c;
-  white-space: nowrap;
-}
-
-.uber.surge .serviceName {
-  color: #ff2a2a;
-}
-
-.uber .serviceName span {
-  font-size: 15px;
-  color: rgb(255, 0, 0);
-}
-
-.uber .time {
-  width: 63px;
-  text-align: center;
-  display: inline-block;
-  line-height: 40px;
-  font-size: 20px;
-  height: 40px;
-}
-
-
 
 #time {
-  margin-left: 30px;
   background: rgba(0,0,0,0.1);
-  width: 381px;
+  width: 25%;
   height: 80px;
   overflow: hidden;
-  padding-left: 10px;
   box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: flex-start;
+}
+#clock, #date {
+  float: left;
+  margin-left: 12.5%;
 }
 #clock {
   font-size: 48px;
   line-height: 48px;
-  padding-bottom: 2px;
+  padding: 7px 0 0 0;
   height: 50px;
-  float: left;
 }
 #date {
   clear: left;
-  float: left;
   font-size: 14px;
   letter-spacing: 4px;
 }
 
 #weatherContainer {
-  width: 33.3%;
+  width: 25%;
   float: right;
 }
 #weather {
-  width: 381px;
-  padding: 7px 0 0 30px;
-  margin-left: 30px;
+  width: 100%;
+  padding: 7px 0 0 200px;
   background: rgba(0,0,0,0.1);
   height:80px;
   box-sizing: border-box;
@@ -302,4 +267,252 @@ word-spacing:inherit !important;
 .slabtextdone .slabtext
 {
 display:block;
+}
+
+/* MUNI-provided route colors */
+#muni_1_outbound .busnumber, #muni_1_inbound .busnumber {
+  background: #cc6600;
+}
+#muni_2_outbound .busnumber, #muni_2_inbound .busnumber {
+  background: #000000;
+}
+#muni_3_outbound .busnumber, #muni_3_inbound .busnumber {
+  background: #339999;
+}
+#muni_5_outbound .busnumber, #muni_5_inbound .busnumber {
+  background: #666699;
+}
+#muni_6_outbound .busnumber, #muni_6_inbound .busnumber {
+  background: #996699;
+}
+#muni_9_outbound .busnumber, #muni_9_inbound .busnumber {
+  background: #889944;
+}
+#muni_10_outbound .busnumber, #muni_10_inbound .busnumber {
+  background: #b07d00;
+}
+#muni_12_outbound .busnumber, #muni_12_inbound .busnumber {
+  background: #b07d00;
+}
+#muni_14_outbound .busnumber, #muni_14_inbound .busnumber {
+  background: #339999;
+}
+#muni_17_outbound .busnumber, #muni_17_inbound .busnumber {
+  background: #003399;
+}
+#muni_18_outbound .busnumber, #muni_18_inbound .busnumber {
+  background: #996699;
+}
+#muni_19_outbound .busnumber, #muni_19_inbound .busnumber {
+  background: #000000;
+}
+#muni_21_outbound .busnumber, #muni_21_inbound .busnumber {
+  background: #660000;
+}
+#muni_22_outbound .busnumber, #muni_22_inbound .busnumber {
+  background: #ff6633;
+}
+#muni_23_outbound .busnumber, #muni_23_inbound .busnumber {
+  background: #b07d00;
+}
+#muni_24_outbound .busnumber, #muni_24_inbound .busnumber {
+  background: #996699;
+}
+#muni_27_outbound .busnumber, #muni_27_inbound .busnumber {
+  background: #660099;
+}
+#muni_28_outbound .busnumber, #muni_28_inbound .busnumber {
+  background: #000000;
+}
+#muni_29_outbound .busnumber, #muni_29_inbound .busnumber {
+  background: #ff6633;
+}
+#muni_30_outbound .busnumber, #muni_30_inbound .busnumber {
+  background: #990099;
+}
+#muni_31_outbound .busnumber, #muni_31_inbound .busnumber {
+  background: #339999;
+}
+#muni_33_outbound .busnumber, #muni_33_inbound .busnumber {
+  background: #660000;
+}
+#muni_35_outbound .busnumber, #muni_35_inbound .busnumber {
+  background: #ff6633;
+}
+#muni_36_outbound .busnumber, #muni_36_inbound .busnumber {
+  background: #003399;
+}
+#muni_37_outbound .busnumber, #muni_37_inbound .busnumber {
+  background: #000000;
+}
+#muni_38_outbound .busnumber, #muni_38_inbound .busnumber {
+  background: #ff6633;
+}
+#muni_39_outbound .busnumber, #muni_39_inbound .busnumber {
+  background: #ff6633;
+}
+#muni_41_outbound .busnumber, #muni_41_inbound .busnumber {
+  background: #b07d00;
+}
+#muni_43_outbound .busnumber, #muni_43_inbound .busnumber {
+  background: #006633;
+}
+#muni_44_outbound .busnumber, #muni_44_inbound .busnumber {
+  background: #ff6633;
+}
+#muni_45_outbound .busnumber, #muni_45_inbound .busnumber {
+  background: #006633;
+}
+#muni_47_outbound .busnumber, #muni_47_inbound .busnumber {
+  background: #667744;
+}
+#muni_48_outbound .busnumber, #muni_48_inbound .busnumber {
+  background: #cc6600;
+}
+#muni_49_outbound .busnumber, #muni_49_inbound .busnumber {
+  background: #b07d00;
+}
+#muni_52_outbound .busnumber, #muni_52_inbound .busnumber {
+  background: #889944;
+}
+#muni_54_outbound .busnumber, #muni_54_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_55_outbound .busnumber, #muni_55_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_56_outbound .busnumber, #muni_56_inbound .busnumber {
+  background: #990099;
+}
+#muni_59_outbound .busnumber, #muni_59_inbound .busnumber {
+  background: #cc3399;
+}
+#muni_60_outbound .busnumber, #muni_60_inbound .busnumber {
+  background: #4444a4;
+}
+#muni_61_outbound .busnumber, #muni_61_inbound .busnumber {
+  background: #9ac520;
+}
+#muni_66_outbound .busnumber, #muni_66_inbound .busnumber {
+  background: #666699;
+}
+#muni_67_outbound .busnumber, #muni_67_inbound .busnumber {
+  background: #555555;
+}
+#muni_71_outbound .busnumber, #muni_71_inbound .busnumber {
+  background: #667744;
+}
+#muni_88_outbound .busnumber, #muni_88_inbound .busnumber {
+  background: #555555;
+}
+#muni_90_outbound .busnumber, #muni_90_inbound .busnumber {
+  background: #660000;
+}
+#muni_91_outbound .busnumber, #muni_91_inbound .busnumber {
+  background: #667744;
+}
+#muni_108_outbound .busnumber, #muni_108_inbound .busnumber {
+  background: #555555;
+}
+#muni_F_outbound .busnumber, #muni_F_inbound .busnumber {
+  background: #555555;
+}
+#muni_J_outbound .busnumber, #muni_J_inbound .busnumber {
+  background: #cc6600;
+}
+#muni_KT_outbound .busnumber, #muni_KT_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_L_outbound .busnumber, #muni_L_inbound .busnumber {
+  background: #660099;
+}
+#muni_M_outbound .busnumber, #muni_M_inbound .busnumber {
+  background: #006633;
+}
+#muni_N_outbound .busnumber, #muni_N_inbound .busnumber {
+  background: #003399;
+}
+#muni_NX_outbound .busnumber, #muni_NX_inbound .busnumber {
+  background: #006633;
+}
+#muni_1AX_outbound .busnumber, #muni_1AX_inbound .busnumber {
+  background: #990000;
+}
+#muni_1BX_outbound .busnumber, #muni_1BX_inbound .busnumber {
+  background: #cc3333;
+}
+#muni_5L_outbound .busnumber, #muni_5L_inbound .busnumber {
+  background: #666699;
+}
+#muni_8X_outbound .busnumber, #muni_8X_inbound .busnumber {
+  background: #996699;
+}
+#muni_8AX_outbound .busnumber, #muni_8AX_inbound .busnumber {
+  background: #996699;
+}
+#muni_8BX_outbound .busnumber, #muni_8BX_inbound .busnumber {
+  background: #996699;
+}
+#muni_9L_outbound .busnumber, #muni_9L_inbound .busnumber {
+  background: #889944;
+}
+#muni_14L_outbound .busnumber, #muni_14L_inbound .busnumber {
+  background: #009900;
+}
+#muni_14X_outbound .busnumber, #muni_14X_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_16X_outbound .busnumber, #muni_16X_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_28L_outbound .busnumber, #muni_28L_inbound .busnumber {
+  background: #009900;
+}
+#muni_30X_outbound .busnumber, #muni_30X_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_31AX_outbound .busnumber, #muni_31AX_inbound .busnumber {
+  background: #990000;
+}
+#muni_31BX_outbound .busnumber, #muni_31BX_inbound .busnumber {
+  background: #cc3333;
+}
+#muni_38AX_outbound .busnumber, #muni_38AX_inbound .busnumber {
+  background: #990000;
+}
+#muni_38BX_outbound .busnumber, #muni_38BX_inbound .busnumber {
+  background: #cc3333;
+}
+#muni_38L_outbound .busnumber, #muni_38L_inbound .busnumber {
+  background: #009900;
+}
+#muni_71L_outbound .busnumber, #muni_71L_inbound .busnumber {
+  background: #009900;
+}
+#muni_76X_outbound .busnumber, #muni_76X_inbound .busnumber {
+  background: #009900;
+}
+#muni_81X_outbound .busnumber, #muni_81X_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_82X_outbound .busnumber, #muni_82X_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_83X_outbound .busnumber, #muni_83X_inbound .busnumber {
+  background: #cc0033;
+}
+#muni_K_OWL_outbound .busnumber, #muni_K_OWL_inbound .busnumber {
+  background: #198080;
+}
+#muni_L_OWL_outbound .busnumber, #muni_L_OWL_inbound .busnumber {
+  background: #330066;
+}
+#muni_M_OWL_outbound .busnumber, #muni_M_OWL_inbound .busnumber {
+  background: #004d19;
+}
+#muni_N_OWL_outbound .busnumber, #muni_N_OWL_inbound .busnumber {
+  background: #001980;
+}
+#muni_T_OWL_outbound .busnumber, #muni_T_OWL_inbound .busnumber {
+  background: #660019;
 }

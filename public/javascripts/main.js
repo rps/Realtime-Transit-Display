@@ -1,5 +1,31 @@
 var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
 
+ var OutboundMUNIroutes = [
+    { name: 5,     stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "5L",  stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 21,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 31,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 38,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "38L", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 1,     stop_id: 6314, direction: 'west', stop_location: 'Sacramento & Sansome' },
+    { name: "N",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "J",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "KT",  stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "L",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "M",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "30X", stop_id: 6326, direction: 'north', stop_location: 'California & Sansome' },
+    { name: 41,    stop_id: 6333, direction: 'north', stop_location: 'Sacramento & Sansome' },
+    { name: 10,    stop_id: 6327, direction: 'north', stop_location: 'California & Sansome' }
+  ];
+
+  var InboundMUNIroutes = [
+    { name: "N",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "J",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "KT",  stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "L",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "M",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' }
+  ];
+
 jQuery.fn.orderBy = function(keySelector) {
   return this.sort(function(a,b) {
     a = keySelector.apply(a);
@@ -11,7 +37,6 @@ jQuery.fn.orderBy = function(keySelector) {
     return 0;
   });
 };
-
 
 function updateWeather() {
   $.getJSON('/api/weather', function(data){
@@ -56,7 +81,7 @@ function updateBARTDepartures(){
     url: 'http://api.bart.gov/api/etd.aspx',
     data: {
       cmd: 'etd',
-      orig: '16TH',
+      orig: 'MONT',
       key: bartAPIKey
     },
     dataType: 'xml',
@@ -141,7 +166,7 @@ function updateBARTAdvisories(){
     url: 'http://api.bart.gov/api/bsa.aspx',
     data: {
       cmd: 'bsa',
-      orig: '16TH',
+      orig: 'MONT',
       key: bartAPIKey
     },
     dataType: 'xml',
@@ -161,112 +186,52 @@ function updateBARTAdvisories(){
   });
 };
 
+function updateMUNI(direction){
+  var routes = {
+    inbound: InboundMUNIroutes,
+    outbound: OutboundMUNIroutes
+  }[direction] || OutboundMUNIroutes.concat(InboundMUNIroutes);
 
-function updateMUNI(){
-  //Define Muni Roures
- var MUNIroutes = [
-    {
-      route: 12,
-      stop:4668,
-      direction: 'north',
-      destination: 'Folsom to Downtown and North Beach'
-    },
-    {
-      route: 12,
-      stop:4669,
-      direction: 'south',
-      destination: 'Folsom to 24th St'
-    },
-    {
-      route: 49,
-      stop:5551,
-      direction: 'north',
-      destination: 'Van Ness to Ft Mason'
+  var agency = '&a=' + 'sf-muni';
 
-    },
-    {
-      route: 49,
-      stop:5552,
-      direction: 'south',
-      destination: 'Mission to Excelsior'
-    },
-    {
-      route: 14,
-      stop:5551,
-      direction: 'north',
-      destination: 'Mission to Transbay & Ferry Building'
-    },
-    {
-      route: 14,
-      stop:5552,
-      direction: 'south',
-      destination: 'Mission to Excelsior'
-    },
-    {
-      route: '14L',
-      stop:5551,
-      direction: 'north',
-      destination: 'Mission to Transbay Terminal'
-    },
-    {
-      route: '14L',
-      stop:5552,
-      direction: 'south',
-      destination: 'Mission to Excelsior'
-    },
-    {
-      route: 22,
-      stop:7289,
-      direction: 'north',
-      destination: 'Fillmore to Marina'
-    },
-    {
-      route: 22,
-      stop:3299,
-      direction: 'east',
-      destination: '16th St to Potrero Hill & Dogpatch'
-    },
-    {
-      route: 33,
-      stop:7289,
-      direction: 'west',
-      destination: '18th to the Haight & the Richmond'
-    },
-    {
-      route: 33,
-      stop:3299,
-      direction: 'south',
-      destination: 'Potrero to 25th St'
-    }
-  ];
-
-  var url = 'http://webservices.nextbus.com/service/publicXMLFeed',
-      callbackCount = 0;
+  var url = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops' + agency;
 
   //Loop through all routes
-  MUNIroutes.forEach(function(route) {
-    $.ajax({
-      url: url,
-      data: {
-        command: 'predictions',
-        a: 'sf-muni',
-        r: route.route,
-        s: route.stop
-      },
-      dataType: 'xml',
-      success:function(result){
-        var divName = 'muni' + route.route.toString().replace(/\s/g, '') + '_' + route.stop,
-            div = $('#'+ divName),
-            routeName = route.route.toString().replace(/\s\D+/g, "<span>$&</span>").replace(/(\d)(L)/g, "$1<span>$2</span>"),
-            predictions = $(result).find('prediction');
+  routes.forEach(function(route) {
+    url += ('&stops=' + route.name + '|' + route.stop_id);
+  });
 
-        callbackCount++;
+  $.ajax({
+    url: url,
+    dataType: 'xml',
+    success:function(result){
+      var predictions = $(result).find('predictions');
+
+      predictions.each(function(i, p){
+        var prediction = $(p);
+        if(prediction.attr('dirTitleBecauseNoPredictions')){
+          return true;
+        }
+
+        var routeTag = prediction.attr('routeTag'),
+            stopTag = prediction.attr('stopTag'),
+            directionTitle = prediction.find('direction').attr('title').split(" "),
+            direction = directionTitle[0].toLowerCase(), // may be valuable to manually replace with cardinal dir
+            destination = {
+              inbound: InboundMUNIroutes,
+              outbound: OutboundMUNIroutes
+            }[direction].filter(function(el){ return el.name == routeTag })[0].stop_location;
+
+        var divName = 'muni_' + routeTag.replace(/\s/g, '') + '_' + direction,
+            div = $('#'+ divName),
+            routeName = routeTag.replace(/\s\D+/g, "<span>$&</span>").replace(/(\d)(L)/g, "$1<span>$2</span>"),
+            times = prediction.find('prediction');
 
         if(!div.length) {
           div = $('<div>')
             .addClass('muni')
             .attr('id', divName)
-            .appendTo('#muni-' + route.direction);
+            .appendTo('#muni-' + direction);
         }
         div
           .empty()
@@ -276,7 +241,7 @@ function updateMUNI(){
           .append($('<div>').addClass('destinationContainer')
             .append($('<div>')
               .addClass('rotate')
-              .html(route.destination)))
+              .html(destination)))
           .append($('<div>')
             .addClass('nextbus time'))
           .append($('<div>')
@@ -286,62 +251,59 @@ function updateMUNI(){
             .append($('<div>')
               .addClass('time')));
 
-        var idx = 0;
-        predictions.each(function(i, data){
+        var results = 0,
+            idx = 0,
+            len = times.length;
+
+        while (results < 3 && idx < len){
           //Limit to 3 results, only show times less than 100, don't show results that are 0
-          if(idx < 3 && $(data).attr('minutes') < 100 && $(data).attr('minutes') > 0){
-            $('.time', div).eq(idx).html($(data).attr('minutes'));
-            idx++;
+          var time = times[idx],
+              min = $(time).attr('minutes');
+          if(min < 100 && min > 0){
+            $('.time', div).eq(results).html(min);
+            results++;
           }
-        });
+          idx++;
+        }
 
         //hide if no predictions
-        div.toggle((predictions.length > 0));
+        div.toggle((times.length > 0));
+      });
 
-        if(callbackCount == MUNIroutes.length) {
-          $('.muniContainer').each(function(idx, muniContainer){
-            $('.muni', muniContainer).orderBy(function() {return +$('.nextbus', this).text();}).appendTo(muniContainer);
-          });
-        }
-      }
-    });
+      $('.muniContainer').each(function(idx, muniContainer){
+        $('.muni', muniContainer).sort(natcmp).appendTo(muniContainer);
+      });
+
+      // Verify data does not run off screen
+      resizeWindow();
+    }
   });
 }
 
-function updateUber() {
-  $.getJSON('/api/uber', function(data) {
-    $('.uberContainer .col1, .uberContainer .col2').empty();
+// https://stackoverflow.com/questions/15478954/sort-array-elements-string-with-numbers-natural-sort
+function strcmp(a, b) {
+    return a > b ? 1 : a < b ? -1 : 0;
+}
 
-    if(data && data[0] && data[0].times) {
-      data[0].times.forEach(function(service, idx) {
-        var div = $('<div>')
-          .addClass('uber')
-          .attr('id', service.product_id)
-          .append($('<div>')
-            .addClass('serviceName')
-            .text(service.display_name))
-          .append($('<div>')
-            .addClass('time')
-            .text(Math.round(service.estimate / 60)));
-        if(idx < 2) {
-          div.appendTo('.uberContainer .col1');
-        } else {
-          div.appendTo('.uberContainer .col2');
-        }
-      });
+function natcmp(a, b) {
+    a = $('.busnumber', a).text()
+    b = $('.busnumber', b).text()
+    var x = [], y = [];
+
+    a.replace(/(\d+)|(\D+)/g, function($0, $1, $2) { x.push([$1 || 0, $2]) })
+    b.replace(/(\d+)|(\D+)/g, function($0, $1, $2) { y.push([$1 || 0, $2]) })
+
+    while(x.length && y.length) {
+        var xx = x.shift();
+        var yy = y.shift();
+        var nn = (xx[0] - yy[0]) || strcmp(xx[1], yy[1]);
+        if(nn) return nn;
     }
-    if(data && data[1] && data[1].prices) {
-      data[1].prices.forEach(function(price, idx) {
-        if(price.surge_multiplier > 1) {
-          var html = price.display_name + ' <span>(' + price.surge_multiplier + 'x)</span>';
-          $('#' + price.product_id)
-            .addClass('surge')
-            .find('.serviceName')
-              .html(html);
-        }
-      });
-    }
-  });
+    // 5L follows 5
+    if(x.length) return +1;
+    if(y.length) return -1;
+
+    return 0;
 }
 
 function updateClock() {
@@ -381,22 +343,14 @@ function updateClock() {
 
 
 function resizeWindow() {
-  var newWindowHeight = $(window).height() - $('#tweetContainer').outerHeight() - $('#pageTitle').outerHeight();
-  $("#transitContainer").height(newWindowHeight);
-  //Scale departures
-  resizeDepartures();
-}
-
-function resizeDepartures(){
-  var visibleHeight = $(window).height() - $('#pageTitle').height() - $('#tweetContainer').height() - 50;
-  //Set #transitBox font-size to 100%;
-  $('#transitBoxContainer').css('font-size','100%');
-  var currentHeight = $('#transitBoxContainer').height();
+  var visibleHeight = $(window).height() - 50,
+      biggestColHeight = Math.max.apply(null, $('.grid-three').map(function(){return $(this).height()})),
+      currentHeight = biggestColHeight + $('header').height();
 
   if(currentHeight > visibleHeight){
     //Calculate percent to scale
     var percent = Math.ceil((1 - ((currentHeight - visibleHeight) / currentHeight)) * 100);
-    $('#transitBoxContainer').css('font-size', percent + '%');
+    // Adjust stuff
   }
 }
 
@@ -418,27 +372,18 @@ $(document).ready(function(){
   //Update Clock
   setInterval(updateClock, 1000);
 
-  //Get BART
+  // Get BART
   updateBART();
   setInterval(updateBART, 15000);
 
   //Get MUNI
   updateMUNI()
-  setInterval(updateMUNI, 15000);
+  setInterval(updateMUNI, 10000);
 
-  //Get Uber
-  updateUber();
-  setInterval(updateUber, 60000);
-
-  //Get weather every hour
+  //Get weather every 15 minutes
   updateWeather();
-  setInterval(updateWeather, 3600000);
-
-  //Resize transit if needed
-  resizeDepartures();
-  setInterval(resizeDepartures, 1000);
+  setInterval(updateWeather, 900000);
 
   //reload browser every 6 hours
   setInterval(reloadPage, 21600000);
-
 });
