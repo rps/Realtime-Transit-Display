@@ -79,7 +79,7 @@ h3 {
   text-align: center;
 }
 .busnumber {
-  font-size: 60px;
+  font-size: 5vh;
   float: left;
   height: 125px;
   width: 125px;
@@ -87,7 +87,7 @@ h3 {
   line-height: 125px;
 }
 .nextbus {
-  font-size: 75px;
+  font-size: 9vh;
   float: left;
   height: 125px;
   line-height: 125px;

@@ -258,6 +258,9 @@ function updateMUNI(){
       $('.muniContainer').each(function(idx, muniContainer){
         $('.muni', muniContainer).orderBy(function() {return $('.busnumber', this).text();}).appendTo(muniContainer);
       });
+
+      // Verify data does not run off screen
+      resizeWindow();
     }
   });
 }
@@ -335,22 +338,14 @@ function updateClock() {
 
 
 function resizeWindow() {
-  var newWindowHeight = $(window).height() - $('#tweetContainer').outerHeight() - $('#pageTitle').outerHeight();
-  $("#transitContainer").height(newWindowHeight);
-  //Scale departures
-  resizeDepartures();
-}
-
-function resizeDepartures(){
-  var visibleHeight = $(window).height() - $('#pageTitle').height() - $('#tweetContainer').height() - 50;
-  //Set #transitBox font-size to 100%;
-  $('#transitBoxContainer').css('font-size','100%');
-  var currentHeight = $('#transitBoxContainer').height();
+  var visibleHeight = $(window).height() - 50,
+      biggestColHeight = Math.max.apply(null, $('.grid-three').map(function(){return $(this).height()})),
+      currentHeight = biggestColHeight + $('header').height();
 
   if(currentHeight > visibleHeight){
     //Calculate percent to scale
     var percent = Math.ceil((1 - ((currentHeight - visibleHeight) / currentHeight)) * 100);
-    $('#transitBoxContainer').css('font-size', percent + '%');
+    $('#main').css('font-size', percent + '%');
   }
 }
 
@@ -378,7 +373,7 @@ $(document).ready(function(){
 
   //Get MUNI
   updateMUNI()
-  setInterval(updateMUNI, 15000);
+  // setInterval(updateMUNI, 15000);
 
   //Get Uber
   // updateUber();
@@ -387,10 +382,6 @@ $(document).ready(function(){
   //Get weather every hour
   // updateWeather();
   // setInterval(updateWeather, 3600000);
-
-  //Resize transit if needed
-  resizeDepartures();
-  setInterval(resizeDepartures, 1000);
 
   //reload browser every 6 hours
   setInterval(reloadPage, 21600000);
