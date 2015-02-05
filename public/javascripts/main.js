@@ -1,4 +1,4 @@
-var bartAPIKey = 'MW9S-E7SL-26DU-VV8V'; // need to change
+var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
 
 jQuery.fn.orderBy = function(keySelector) {
   return this.sort(function(a,b) {
@@ -55,7 +55,7 @@ function updateBARTDepartures(){
     url: 'http://api.bart.gov/api/etd.aspx',
     data: {
       cmd: 'etd',
-      orig: '16TH',
+      orig: 'MONT',
       key: bartAPIKey
     },
     dataType: 'xml',
@@ -140,7 +140,7 @@ function updateBARTAdvisories(){
     url: 'http://api.bart.gov/api/bsa.aspx',
     data: {
       cmd: 'bsa',
-      orig: '16TH',
+      orig: 'MONT',
       key: bartAPIKey
     },
     dataType: 'xml',
@@ -185,7 +185,7 @@ function updateMUNI(direction){
     { name: "KT",  stop_id: 5731, direction: 'east' },
     { name: "L",   stop_id: 5731, direction: 'east' },
     { name: "M",   stop_id: 5731, direction: 'east' }
-  ]
+  ];
 
   var routes = {
     inbound: InboundMUNIroutes,
@@ -371,15 +371,15 @@ $(document).ready(function(){
 
   // Get BART
   updateBART();
-  // setInterval(updateBART, 15000);
+  setInterval(updateBART, 15000);
 
   //Get MUNI
   updateMUNI()
-  // setInterval(updateMUNI, 15000);
+  setInterval(updateMUNI, 10000);
 
-  //Get weather every 10 minutes
+  //Get weather every 15 minutes
   updateWeather();
-  setInterval(updateWeather, 600000);
+  setInterval(updateWeather, 900000);
 
   //reload browser every 6 hours
   setInterval(reloadPage, 21600000);
