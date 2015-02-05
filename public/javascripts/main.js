@@ -1,5 +1,31 @@
 var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
 
+ var OutboundMUNIroutes = [
+    { name: 5,     stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "5L",  stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 21,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 31,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 38,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "38L", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 1,     stop_id: 6314, direction: 'west', stop_location: 'Sacramento & Sansome' },
+    { name: "N",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "J",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "KT",  stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "L",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "M",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "30X", stop_id: 6326, direction: 'north', stop_location: 'California & Sansome' },
+    { name: 41,    stop_id: 6333, direction: 'north', stop_location: 'Sacramento & Sansome' },
+    { name: 10,    stop_id: 6327, direction: 'north', stop_location: 'California & Sansome' }
+  ];
+
+  var InboundMUNIroutes = [
+    { name: "N",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "J",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "KT",  stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "L",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "M",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' }
+  ];
+
 jQuery.fn.orderBy = function(keySelector) {
   return this.sort(function(a,b) {
     a = keySelector.apply(a);
@@ -161,32 +187,6 @@ function updateBARTAdvisories(){
 };
 
 function updateMUNI(direction){
- var OutboundMUNIroutes = [
-    { name: 5,     stop_id: 5689, direction: 'west' },
-    { name: "5L",  stop_id: 5689, direction: 'west' },
-    { name: 21,    stop_id: 5689, direction: 'west' },
-    { name: 31,    stop_id: 5689, direction: 'west' },
-    { name: 38,    stop_id: 5689, direction: 'west' },
-    { name: "38L", stop_id: 5689, direction: 'west' },
-    { name: 1,     stop_id: 6314, direction: 'west' },
-    { name: "N",   stop_id: 6994, direction: 'south' },
-    { name: "J",   stop_id: 6994, direction: 'south' },
-    { name: "KT",  stop_id: 6994, direction: 'south' },
-    { name: "L",   stop_id: 6994, direction: 'south' },
-    { name: "M",   stop_id: 6994, direction: 'south' },
-    { name: "30X", stop_id: 6326, direction: 'north' },
-    { name: 41,    stop_id: 6333, direction: 'north' },
-    { name: 10,    stop_id: 6327, direction: 'north' }
-  ];
-
-  var InboundMUNIroutes = [
-    { name: "N",   stop_id: 5731, direction: 'east' },
-    { name: "J",   stop_id: 5731, direction: 'east' },
-    { name: "KT",  stop_id: 5731, direction: 'east' },
-    { name: "L",   stop_id: 5731, direction: 'east' },
-    { name: "M",   stop_id: 5731, direction: 'east' }
-  ];
-
   var routes = {
     inbound: InboundMUNIroutes,
     outbound: OutboundMUNIroutes
@@ -217,7 +217,10 @@ function updateMUNI(direction){
             stopTag = prediction.attr('stopTag'),
             directionTitle = prediction.find('direction').attr('title').split(" "),
             direction = directionTitle[0].toLowerCase(), // may be valuable to manually replace with cardinal dir
-            destination = directionTitle.splice(2).join(" ");
+            destination = {
+              inbound: InboundMUNIroutes,
+              outbound: OutboundMUNIroutes
+            }[direction].filter(function(el){ return el.name == routeTag })[0].stop_location;
 
         var divName = 'muni_' + routeTag.replace(/\s/g, '') + '_' + direction,
             div = $('#'+ divName),
