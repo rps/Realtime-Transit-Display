@@ -163,32 +163,32 @@ function updateBARTAdvisories(){
 
 function updateMUNI(direction){
  var OutboundMUNIroutes = [
-    { route: 5,     stop: 5689, direction: 'west' },
-    { route: "5L",  stop: 5689, direction: 'west' },
-    { route: 21,    stop: 5689, direction: 'west' },
-    { route: 31,    stop: 5689, direction: 'west' },
-    { route: 38,    stop: 5689, direction: 'west' },
-    { route: "38L", stop: 5689, direction: 'west' },
-    { route: 1,     stop: 6314, direction: 'west' },
-    { route: "N",   stop: 6994, direction: 'south' },
-    { route: "J",   stop: 6994, direction: 'south' },
-    { route: "KT",  stop: 6994, direction: 'south' },
-    { route: "L",   stop: 6994, direction: 'south' },
-    { route: "M",   stop: 6994, direction: 'south' },
-    { route: "30X", stop: 6326, direction: 'north' },
-    { route: 41,    stop: 6333, direction: 'north' },
-    { route: 10,    stop: 6327, direction: 'north' }
+    { name: 5,     stop_id: 5689, direction: 'west' },
+    { name: "5L",  stop_id: 5689, direction: 'west' },
+    { name: 21,    stop_id: 5689, direction: 'west' },
+    { name: 31,    stop_id: 5689, direction: 'west' },
+    { name: 38,    stop_id: 5689, direction: 'west' },
+    { name: "38L", stop_id: 5689, direction: 'west' },
+    { name: 1,     stop_id: 6314, direction: 'west' },
+    { name: "N",   stop_id: 6994, direction: 'south' },
+    { name: "J",   stop_id: 6994, direction: 'south' },
+    { name: "KT",  stop_id: 6994, direction: 'south' },
+    { name: "L",   stop_id: 6994, direction: 'south' },
+    { name: "M",   stop_id: 6994, direction: 'south' },
+    { name: "30X", stop_id: 6326, direction: 'north' },
+    { name: 41,    stop_id: 6333, direction: 'north' },
+    { name: 10,    stop_id: 6327, direction: 'north' }
   ];
 
   var InboundMUNIroutes = [
-    { route: "N",   stop: 5731, direction: 'east' },
-    { route: "J",   stop: 5731, direction: 'east' },
-    { route: "KT",  stop: 5731, direction: 'east' },
-    { route: "L",   stop: 5731, direction: 'east' },
-    { route: "M",   stop: 5731, direction: 'east' }
+    { name: "N",   stop_id: 5731, direction: 'east' },
+    { name: "J",   stop_id: 5731, direction: 'east' },
+    { name: "KT",  stop_id: 5731, direction: 'east' },
+    { name: "L",   stop_id: 5731, direction: 'east' },
+    { name: "M",   stop_id: 5731, direction: 'east' }
   ]
 
-  var dir = {
+  var routes = {
     inbound: InboundMUNIroutes,
     outbound: OutboundMUNIroutes
   }[direction] || OutboundMUNIroutes.concat(InboundMUNIroutes);
@@ -198,8 +198,8 @@ function updateMUNI(direction){
   var url = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops' + agency;
 
   //Loop through all routes
-  OutboundMUNIroutes.forEach(function(route) {
-    url += ('&stops=' + route.route + '|' + route.stop);
+  routes.forEach(function(route) {
+    url += ('&stops=' + route.name + '|' + route.stop_id);
   });
 
   $.ajax({
@@ -220,7 +220,7 @@ function updateMUNI(direction){
             direction = directionTitle[0].toLowerCase(), // may be valuable to manually replace with cardinal dir
             destination = directionTitle.splice(2).join(" ");
 
-        var divName = 'muni_' + routeTag.replace(/\s/g, ''),
+        var divName = 'muni_' + routeTag.replace(/\s/g, '') + '_' + direction,
             div = $('#'+ divName),
             routeName = routeTag.replace(/\s\D+/g, "<span>$&</span>").replace(/(\d)(L)/g, "$1<span>$2</span>"),
             times = prediction.find('prediction');
@@ -269,13 +269,39 @@ function updateMUNI(direction){
       });
 
       $('.muniContainer').each(function(idx, muniContainer){
-        $('.muni', muniContainer).orderBy(function() {return $('.busnumber', this).text();}).appendTo(muniContainer);
+        $('.muni', muniContainer).sort(natcmp).appendTo(muniContainer);
       });
 
       // Verify data does not run off screen
       resizeWindow();
     }
   });
+}
+
+// https://stackoverflow.com/questions/15478954/sort-array-elements-string-with-numbers-natural-sort
+function strcmp(a, b) {
+    return a > b ? 1 : a < b ? -1 : 0;
+}
+
+function natcmp(a, b) {
+    a = $('.busnumber', a).text()
+    b = $('.busnumber', b).text()
+    var x = [], y = [];
+
+    a.replace(/(\d+)|(\D+)/g, function($0, $1, $2) { x.push([$1 || 0, $2]) })
+    b.replace(/(\d+)|(\D+)/g, function($0, $1, $2) { y.push([$1 || 0, $2]) })
+
+    while(x.length && y.length) {
+        var xx = x.shift();
+        var yy = y.shift();
+        var nn = (xx[0] - yy[0]) || strcmp(xx[1], yy[1]);
+        if(nn) return nn;
+    }
+    // 5L follows 5
+    if(x.length) return +1;
+    if(y.length) return -1;
+
+    return 0;
 }
 
 function updateUber() {
