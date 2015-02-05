@@ -18,7 +18,6 @@ header {
   height: 100%;
 }
 #main .grid-three {
-  width: 33.333%;
   min-width: 415px;
   float: left;
   min-height: 20px;
@@ -26,59 +25,79 @@ header {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: flex-start;
 }
 #main .grid-three:nth-of-type(1) {
+  width: 25%;
   border-top: 3px solid rgb(222, 0, 255);
+  padding: 0 1px 0 0;
 }
 #main .grid-three:nth-of-type(2) {
+  width: 50%;
   border-top: 3px solid rgb(0, 255, 36);
+  padding: 0 1px;
 }
 #main .grid-three:nth-of-type(3) {
+  width: 25%;
   border-top: 3px solid rgb(0, 180, 255);
+  padding: 0 0 0 1px;
+}
+.bartContainer, .muniContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+.muniContainer {
+  height: 900px;
 }
 h2 {
   text-transform: uppercase;
-  margin: 20px 0 0 30px;
+  text-align: center;
+  font-size: 2em;
+  margin: 7px 0 4px 0;
   background: rgba(0, 0, 0, 0.1);
-  width: 381px;
+  width: 100%;
   padding: 0 4px;
   box-sizing: border-box;
-  letter-spacing: 1px;
-}
-#muni1 h2, #muni2 h2 {
-  width: 288.75px;
+  letter-spacing: 2px;
+  align-self: center;
 }
 h3 {
   text-transform: uppercase;
 }
-.muniContainer,
+/*.muniContainer,
 .bartContainer {
   overflow: hidden;
-}
+}*/
 .muni,
 .bart {
   float: left;
   clear: both;
-  margin: 2px 0 0 30px;
+  margin: 2px 20px 0 20px;
 }
-#muni-outbound {
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+/*.muni {
+  margin-right: 50px;
+} */
+/*.bart {
+  margin-left: 50px;
+}*/
 .muni .destinationContainer {
-  width: 28.5px;
-  height: 93.75px;
+  width: 38px;
+  height: 125px;
   float: left;
   position: relative;
-  margin: 0 2.25px;
+  margin: 0 3px;
 }
 .muni .rotate {
-  width: 93.75px;
-  height: 28.5px;
-  font-size: 9px;
-  padding: 1.5px;
+  width: 125px;
+  height: 38px;
+  font-size: 12px;
+  padding: 2px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.1);
   position: absolute;
@@ -86,35 +105,35 @@ h3 {
   text-align: center;
 }
 .busnumber {
-  font-size: 45px;
+  font-size: 60px;
   float: left;
-  height: 93.75px;
-  width: 93.75px;
+  height: 125px;
+  width: 125px;
   text-align: center;
-  line-height: 93.75px;
+  line-height: 125px;
 }
 .nextbus {
-  font-size: 56.25px;
+  font-size: 75px;
   float: left;
-  height: 93.75px;
-  line-height: 93.75px;
-  width: 112.5px;
+  height: 125px;
+  line-height: 125px;
+  width: 150px;
   text-align: center;
   background: rgba(0,0,0,0.1);
 }
 .laterbuses {
   float: left;
-  height: 93.75px;
+  height: 125px;
   margin-left: 2px;
   background: rgba(0,0,0,0.1);
 }
 .laterbuses .time {
-  height: 45.75px;
-  width: 46.875px;
+  height: 61px;
+  width: 62.5px;
   text-align: center;
-  line-height: 46.875px;
+  line-height: 62.5px;
   margin: 0;
-  font-size: 15px;
+  font-size: 20px;
 }
 .laterbuses .time:first-child {
   border-bottom: 3px solid #2f363c;
@@ -206,11 +225,11 @@ h3 {
   width: 50px;
 }
 .rotate {
-  -webkit-transform: rotate(-90deg) translateY(28.5px);
-  -moz-transform: rotate(-90deg) translateY(28.5px);
-  -ms-transform: rotate(-90deg) translateY(28.5px);
-  -o-transform: rotate(-90deg) translateY(28.5px);
-  transform: rotate(-90deg) translateY(28.5px);
+  -webkit-transform: rotate(-90deg) translateY(38px);
+  -moz-transform: rotate(-90deg) translateY(38px);
+  -ms-transform: rotate(-90deg) translateY(38px);
+  -o-transform: rotate(-90deg) translateY(38px);
+  transform: rotate(-90deg) translateY(38px);
 
   /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
   -webkit-transform-origin: bottom left;
