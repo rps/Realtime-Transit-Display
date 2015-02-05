@@ -377,11 +377,10 @@ $(document).ready(function(){
   updateMUNI()
   // setInterval(updateMUNI, 15000);
 
-  //Get weather every hour
-  // updateWeather();
-  // setInterval(updateWeather, 3600000);
+  //Get weather every 10 minutes
+  updateWeather();
+  setInterval(updateWeather, 600000);
 
   //reload browser every 6 hours
   setInterval(reloadPage, 21600000);
-
 });
