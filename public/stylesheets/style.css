@@ -60,17 +60,20 @@ h3 {
   clear: both;
   margin: 2px 0 0 30px;
 }
+.muni {
+  height: 5vh;
+}
 .muni .destinationContainer {
   width: 38px;
-  height: 125px;
+  height: 5.6vh;
   float: left;
   position: relative;
   margin: 0 3px;
 }
 .muni .rotate {
-  width: 125px;
-  height: 38px;
-  font-size: 12px;
+  width: 5.6vh;
+  height: 50px;
+  font-size: .9vh;
   padding: 2px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.1);
@@ -79,33 +82,33 @@ h3 {
   text-align: center;
 }
 .busnumber {
-  font-size: 5vh;
+  font-size: 3.8vh;
   float: left;
-  height: 125px;
+  height: 5.6vh;
   width: 125px;
   text-align: center;
-  line-height: 125px;
+  line-height: 5.6vh;
 }
 .nextbus {
-  font-size: 9vh;
+  font-size: 5vh;
   float: left;
-  height: 125px;
-  line-height: 125px;
+  height: 5.6vh;
+  line-height: 5.6vh;
   width: 150px;
   text-align: center;
   background: rgba(0,0,0,0.1);
 }
 .laterbuses {
   float: left;
-  height: 125px;
+  height: 5.6vh;
   margin-left: 2px;
   background: rgba(0,0,0,0.1);
 }
 .laterbuses .time {
-  height: 61px;
+  height: 2.8vh;
   width: 62.5px;
   text-align: center;
-  line-height: 62.5px;
+  line-height: 2.8vh;
   margin: 0;
   font-size: 20px;
 }
