@@ -345,7 +345,7 @@ function resizeWindow() {
   if(currentHeight > visibleHeight){
     //Calculate percent to scale
     var percent = Math.ceil((1 - ((currentHeight - visibleHeight) / currentHeight)) * 100);
-    $('#main').css('font-size', percent + '%');
+    // Adjust stuff
   }
 }
 
