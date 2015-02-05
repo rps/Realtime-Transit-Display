@@ -148,28 +148,6 @@ h3 {
   height: 49px;
   line-height: 50px;
 }
-#muni12_4669 .busnumber,
-#muni12_4668 .busnumber {
-  background: #b304a9;
-}
-#muni49_5552 .busnumber,
-#muni49_5551 .busnumber {
-  background: #00b77d;
-}
-#muni14_5552 .busnumber,
-#muni14_5551 .busnumber,
-#muni14L_5552 .busnumber,
-#muni14L_5551 .busnumber{
-  background: #dca102;
-}
-#muni22_3299 .busnumber,
-#muni22_7289 .busnumber {
-  background: #0f6fb9;
-}
-#muni33_3299 .busnumber,
-#muni33_7289 .busnumber {
-  background: #b4304f;
-}
 
 #uber .col1,
 #uber .col2 {
