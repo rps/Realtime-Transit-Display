@@ -74,7 +74,12 @@ h3 {
 .bart {
   float: left;
   clear: both;
+}
+.bart {
   margin: 2px 20px 0 20px;
+}
+.muni {
+  margin: 2px 5px 0 5px;
 }
 .muni .destinationContainer {
   width: 38px;
