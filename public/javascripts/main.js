@@ -381,8 +381,8 @@ $(document).ready(function(){
   updateMUNI()
 
   //Get weather every 15 minutes
-  var today = new Date(),
-      mins = today.getMinutes(),
-      seconds = today.getSeconds(); // limiter for screens
-  if(mins % 15 === 0 && seconds < 10){ updateWeather(); }
+  // var today = new Date(),
+  //     mins = today.getMinutes(),
+  //     seconds = today.getSeconds(); // limiter for screens
+  // if(mins % 15 === 0 && seconds < 10){ updateWeather(); }
 });
