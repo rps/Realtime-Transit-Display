@@ -25,7 +25,7 @@ header {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
-}
+  }
 #main .grid-three:nth-of-type(1) {
   width: 25%;
   border-top: 3px solid rgb(222, 0, 255);
@@ -42,11 +42,19 @@ header {
   padding: 0 0 0 1px;
 }
 .bartContainer, .muniContainer {
-  align-items: center;
+    align-items: center;
   align-content: center;
 }
 .muniContainer {
   height: 900px;
+}
+#main .grid-three:nth-of-type(2) .muniContainer {
+  -moz-column-count: 2;
+  -moz-column-gap: 10px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 10px;
+  column-count: 2;
+  column-gap: 10px;
 }
 h2 {
   text-transform: uppercase;
@@ -175,7 +183,7 @@ h3 {
   height: 80px;
   overflow: hidden;
   box-sizing: border-box;
-}
+  }
 #clock, #date {
   float: left;
   margin-left: 12.5%;
