@@ -62,7 +62,7 @@ h2 {
   font-size: 2em;
   margin: 7px 0 4px 0;
   background: rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 96%;
   padding: 0 4px;
   box-sizing: border-box;
   letter-spacing: 2px;
@@ -120,7 +120,7 @@ h3 {
 }
 .laterbuses .time {
   height: 61px;
-  width: 62.5px;
+  width: 51.5px;
   text-align: center;
   line-height: 62.5px;
   margin: 0;
