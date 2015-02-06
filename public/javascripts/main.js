@@ -371,19 +371,16 @@ $(document).ready(function(){
 
   //Update Clock
   updateClock();
-  setInterval(updateClock, 1000);
 
   // Get BART
   updateBART();
-  setInterval(updateBART, 15000);
 
   //Get MUNI
   updateMUNI()
-  setInterval(updateMUNI, 10000);
 
   //Get weather every 15 minutes
-  updateWeather();
-  setInterval(updateWeather, 900000);
+  var mins = new Date().getMinutes();
+  if(mins % 15 === 0){ updateWeather(); }
 
   //reload browser every 6 hours
   setInterval(reloadPage, 21600000);
