@@ -9,15 +9,15 @@ var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
     { name: "38L", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
     { name: 1,     stop_id: 6314, direction: 'west', stop_location: 'Sacramento & Sansome' },
     { name: "NX",  stop_id: 6606, direction: 'west', stop_location: 'Sutter & Sansome' },
-    // { name: 12, stop_id: 6327, direction: 'south', stop_location: 'California & Sansome' },
+    { name: 12, stop_id: 6327, direction: 'south', stop_location: 'California & Sansome' },
     { name: "N",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
     { name: "J",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
     { name: "KT",  stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
     { name: "L",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
     { name: "M",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
-    { name: "30X", stop_id: 6326, direction: 'north', stop_location: 'California & Sansome' }
-    // { name: 41,    stop_id: 6333, direction: 'north', stop_location: 'Sacramento & Sansome' },
-    // { name: 10,    stop_id: 6327, direction: 'north', stop_location: 'California & Sansome' }
+    { name: "30X", stop_id: 6326, direction: 'north', stop_location: 'California & Sansome' },
+    { name: 41,    stop_id: 6333, direction: 'north', stop_location: 'Sacramento & Sansome' },
+    { name: 10,    stop_id: 6327, direction: 'north', stop_location: 'California & Sansome' }
   ];
 
   var InboundMUNIroutes = [

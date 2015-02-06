@@ -27,33 +27,33 @@ header {
   -webkit-overflow-scrolling: touch;
   }
 #main .grid-three:nth-of-type(1) {
-  width: 25%;
+  width: 17%;
   border-top: 3px solid rgb(222, 0, 255);
   padding: 0 1px 0 0;
 }
 #main .grid-three:nth-of-type(2) {
-  width: 50%;
+  width: 66%;
   border-top: 3px solid rgb(0, 255, 36);
   padding: 0 1px;
 }
 #main .grid-three:nth-of-type(3) {
-  width: 25%;
+  width: 17%;
   border-top: 3px solid rgb(0, 180, 255);
   padding: 0 0 0 1px;
 }
 .bartContainer, .muniContainer {
-    align-items: center;
+  align-items: center;
   align-content: center;
 }
 .muniContainer {
   height: 900px;
 }
 #main .grid-three:nth-of-type(2) .muniContainer {
-  -moz-column-count: 2;
+  -moz-column-count: 3;
   -moz-column-gap: 10px;
-  -webkit-column-count: 2;
+  -webkit-column-count: 3;
   -webkit-column-gap: 10px;
-  column-count: 2;
+  column-count: 3;
   column-gap: 10px;
 }
 h2 {
@@ -70,22 +70,12 @@ h2 {
 h3 {
   text-transform: uppercase;
 }
-/*.muniContainer,
-.bartContainer {
-  overflow: hidden;
-}*/
 .muni,
 .bart {
   float: left;
   clear: both;
   margin: 2px 20px 0 20px;
 }
-/*.muni {
-  margin-right: 50px;
-} */
-/*.bart {
-  margin-left: 50px;
-}*/
 .muni .destinationContainer {
   width: 38px;
   height: 125px;
