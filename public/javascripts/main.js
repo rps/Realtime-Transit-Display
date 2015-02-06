@@ -379,9 +379,6 @@ $(document).ready(function(){
   updateMUNI()
 
   //Get weather every 15 minutes
-  var mins = new Date().getMinutes();
-  if(mins % 15 === 0){ updateWeather(); }
-
-  //reload browser every 6 hours
-  setInterval(reloadPage, 21600000);
+  // var mins = new Date().getMinutes();
+  // if(mins % 15 === 0){ updateWeather(); }
 });
