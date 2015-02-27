@@ -2,7 +2,7 @@
 
 A realtime transit display meant for a kiosk with no user interaction.  It shows realtime arrivals of MUNI and BART transit vehicles for nearby stations, Uber wait times and weather.
 
-![realtime-transit-screenshot](https://cloud.githubusercontent.com/assets/96217/4850393/82544c50-6069-11e4-8a2b-a818d29e009b.png)
+![realtime-transit-screenshot](https://cloud.githubusercontent.com/assets/5246402/6420623/7a6c7802-be7c-11e4-9f2e-da9056f5f155.png)
 ## Example
 You can see the Realtime Transit Display in use at
 [transit.bn.ee](http://transit.bn.ee).  Optionally, a raspberry pi can be used to
