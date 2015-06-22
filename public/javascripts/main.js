@@ -2,11 +2,11 @@ var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
 
  var OutboundMUNIroutes = [
     { name: 5,     stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-    { name: "5L",  stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "5R",  stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
     { name: 21,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
     { name: 31,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
     { name: 38,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-    { name: "38L", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "38R", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
     { name: 1,     stop_id: 6314, direction: 'west', stop_location: 'Sacramento & Sansome' },
     { name: "N",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
     { name: "J",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
