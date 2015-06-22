@@ -441,7 +441,7 @@ display:block;
 #muni_1BX_outbound .busnumber, #muni_1BX_inbound .busnumber {
   background: #cc3333;
 }
-#muni_5L_outbound .busnumber, #muni_5L_inbound .busnumber {
+#muni_5R_outbound .busnumber, #muni_5R_inbound .busnumber {
   background: #666699;
 }
 #muni_8X_outbound .busnumber, #muni_8X_inbound .busnumber {
@@ -453,10 +453,10 @@ display:block;
 #muni_8BX_outbound .busnumber, #muni_8BX_inbound .busnumber {
   background: #996699;
 }
-#muni_9L_outbound .busnumber, #muni_9L_inbound .busnumber {
+#muni_9R_outbound .busnumber, #muni_9R_inbound .busnumber {
   background: #889944;
 }
-#muni_14L_outbound .busnumber, #muni_14L_inbound .busnumber {
+#muni_14R_outbound .busnumber, #muni_14R_inbound .busnumber {
   background: #009900;
 }
 #muni_14X_outbound .busnumber, #muni_14X_inbound .busnumber {
@@ -465,7 +465,7 @@ display:block;
 #muni_16X_outbound .busnumber, #muni_16X_inbound .busnumber {
   background: #cc0033;
 }
-#muni_28L_outbound .busnumber, #muni_28L_inbound .busnumber {
+#muni_28R_outbound .busnumber, #muni_28R_inbound .busnumber {
   background: #009900;
 }
 #muni_30X_outbound .busnumber, #muni_30X_inbound .busnumber {
@@ -483,10 +483,10 @@ display:block;
 #muni_38BX_outbound .busnumber, #muni_38BX_inbound .busnumber {
   background: #cc3333;
 }
-#muni_38L_outbound .busnumber, #muni_38L_inbound .busnumber {
+#muni_38R_outbound .busnumber, #muni_38R_inbound .busnumber {
   background: #009900;
 }
-#muni_71L_outbound .busnumber, #muni_71L_inbound .busnumber {
+#muni_71R_outbound .busnumber, #muni_71R_inbound .busnumber {
   background: #009900;
 }
 #muni_76X_outbound .busnumber, #muni_76X_inbound .busnumber {
