@@ -1,6 +1,6 @@
 # Realtime-Transit-Display
 
-A realtime transit display meant for a kiosk with no user interaction.  It shows realtime arrivals of MUNI and BART transit vehicles for nearby stations, Uber wait times and weather.
+A realtime transit display meant for a kiosk with no user interaction.  It shows realtime arrivals of MUNI and BART transit vehicles for nearby stations.
 
 ![realtime-transit-screenshot](https://cloud.githubusercontent.com/assets/5246402/6420623/7a6c7802-be7c-11e4-9f2e-da9056f5f155.png)
 ## Example
@@ -26,7 +26,7 @@ Copy config-sample.json to config.json
 
     cp config-sample.json config.json
 
-Add your wunderground token and Uber Token to config.js.
+Add your wunderground token to config.js.
 
 ### Run the app
 
