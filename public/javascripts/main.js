@@ -374,17 +374,17 @@ $(document).ready(function(){
   setInterval(updateClock, 1000);
 
   // Get BART
-  updateBART();
-  setInterval(updateBART, 15000);
+  // updateBART();
+  // setInterval(updateBART, 15000);
 
-  //Get MUNI
-  updateMUNI()
-  setInterval(updateMUNI, 10000);
+  // //Get MUNI
+  // updateMUNI()
+  // setInterval(updateMUNI, 10000);
 
-  //Get weather every 15 minutes
-  updateWeather();
-  setInterval(updateWeather, 900000);
+  // //Get weather every 15 minutes
+  // updateWeather();
+  // setInterval(updateWeather, 900000);
 
-  //reload browser every 6 hours
-  setInterval(reloadPage, 21600000);
+  // //reload browser every 6 hours
+  // setInterval(reloadPage, 21600000);
 });

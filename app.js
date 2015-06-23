@@ -7,9 +7,9 @@ var nconf = require('nconf');
 
 var routes = require('./routes/index');
 var wunderground = require('./routes/wunderground');
+var poller = require('./poller.js');
 
 var app = express();
-
 
 nconf.env().argv();
 nconf.file('./config.json');
@@ -23,8 +23,9 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/api/weather', wunderground);
+app.use('/', routes);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,6 +57,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
