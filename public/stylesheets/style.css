@@ -1,4 +1,77 @@
-body, html {
+* { padding: 0; margin: 0; }
+html {
+  height: 100%;
+}
+body {
+  height: 100%
+}
+h2 {
+  padding-bottom: 20px;
+}
+#main {
+  height: 100%;
+}
+#header {
+  height: 5%;
+}
+#bart.grid-three {
+  width: 20%;
+  height: 95%;
+  float:left;
+}
+#muni1.grid-three {
+  width: 50%;
+  height: 90%;
+  float:left;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: flex-start;
+}
+.muniContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: left;
+}
+#muni2.grid-three {
+  width: 20%;
+  height: 95%;
+  float:left;
+}
+.busnumber {
+  width: 100px;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 100px;
+  display: inline-block;
+  float: left;
+}
+.muni {
+  height: 100px;
+  width: 200px;
+}
+.laterbuses {
+  float: left;
+  margin-left: 2px;
+  background: rgba(0,0,0,0.1);
+}
+.laterbuses .time {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  margin: 0;
+  font-size: 20px;
+}
+.laterbuses .time:first-child {
+  border-bottom: 1px dotted #2f363c;
+}
+.laterbuses .time:last-child {
+  border-bottom: 3px solid #2f363c;
+}
+/*body, html {
   background: #2f363c;
   color: white;
   margin: 0;
@@ -31,17 +104,17 @@ header {
   align-content: flex-start;
 }
 #main .grid-three:nth-of-type(1) {
-  width: 25%;
+  width: 15%;
   border-top: 3px solid rgb(222, 0, 255);
   padding: 0 1px 0 0;
 }
 #main .grid-three:nth-of-type(2) {
-  width: 50%;
+  width: 70%;
   border-top: 3px solid rgb(0, 255, 36);
   padding: 0 1px;
 }
 #main .grid-three:nth-of-type(3) {
-  width: 25%;
+  width: 10%;
   border-top: 3px solid rgb(0, 180, 255);
   padding: 0 0 0 1px;
 }
@@ -50,10 +123,10 @@ header {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  align-content: center;
+  align-content: left;
 }
 .muniContainer {
-  height: 900px;
+  height: 90%;
 }
 h2 {
   text-transform: uppercase;
@@ -73,19 +146,19 @@ h3 {
 .bartContainer {
   overflow: hidden;
 }*/
-.muni,
+/*.muni,
 .bart {
   float: left;
   clear: both;
   margin: 2px 20px 0 20px;
-}
+}*/
 /*.muni {
   margin-right: 50px;
 } */
 /*.bart {
   margin-left: 50px;
 }*/
-.muni .destinationContainer {
+/*.muni .destinationContainer {
   width: 38px;
   height: 125px;
   float: left;
@@ -121,23 +194,7 @@ h3 {
   text-align: center;
   background: rgba(0,0,0,0.1);
 }
-.laterbuses {
-  float: left;
-  height: 125px;
-  margin-left: 2px;
-  background: rgba(0,0,0,0.1);
-}
-.laterbuses .time {
-  height: 61px;
-  width: 62.5px;
-  text-align: center;
-  line-height: 62.5px;
-  margin: 0;
-  font-size: 20px;
-}
-.laterbuses .time:first-child {
-  border-bottom: 3px solid #2f363c;
-}
+
 #bart .advisories .advisory {
   font-size: 24px;
   font-weight: bold;
@@ -236,18 +293,18 @@ h3 {
   transform: rotate(-90deg) translateY(38px);
 
   /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
-  -webkit-transform-origin: bottom left;
+  /*-webkit-transform-origin: bottom left;
   -moz-transform-origin: bottom left;
   -ms-transform-origin: bottom left;
   -o-transform-origin: bottom left;
   transform-origin: bottom left;
 
   /* Should be unset in IE9+ I think. */
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  /*filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 /* For slabtext plugin */
-
+/*
 .slabtexted .slabtext
 {
 display:-moz-inline-box;
@@ -267,7 +324,9 @@ word-spacing:inherit !important;
 .slabtextdone .slabtext
 {
 display:block;
-}
+}*/
+
+
 
 /* MUNI-provided route colors */
 #muni_1_outbound .busnumber, #muni_1_inbound .busnumber {

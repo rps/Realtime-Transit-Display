@@ -46,11 +46,13 @@ function refreshRoutes(){
     .get(baseurl)
     .query(queryString)
     .end(function(err, result){
-      var xml = new xmldoc.XmlDocument(result.text);
-      storage = parseRoutes(xml.children);
+      if(result.text){
+        var xml = new xmldoc.XmlDocument(result.text);
+        storage = parseRoutes(xml.children);
+      }
     });
 
-  setTimeout(refreshRoutes, 10000);
+  setTimeout(refreshRoutes, 20000);
 }
 
 poller.init = function(){

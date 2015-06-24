@@ -3,7 +3,7 @@ extends layout
 block content
 
   #main
-    header
+    #header
       #weatherContainer
         #weather
           .temp
@@ -17,7 +17,7 @@ block content
       #bart-north.bartContainer
       h2 BART Southbound
       #bart-south.bartContainer
-    #muni2.grid-three
+    #muni1.grid-three
       h2 MUNI Outbound (West)
       #muni-outbound.muniContainer
         each times, route in result.Outbound
@@ -26,8 +26,6 @@ block content
             .laterbuses
               each latertimes in times
                 .time #{latertimes}
-    #muni1.grid-three
+    #muni2.grid-three
       h2 MUNI Inbound (East)
       #muni-inbound.muniContainer
-
-  script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
