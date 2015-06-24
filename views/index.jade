@@ -20,6 +20,12 @@ block content
     #muni2.grid-three
       h2 MUNI Outbound (West)
       #muni-outbound.muniContainer
+        each times, route in result.Outbound
+          div(class='muni', id='muni_#{route}_outbound')
+            .busnumber #{route}
+            .laterbuses
+              each latertimes in times
+                .time #{latertimes}
     #muni1.grid-three
       h2 MUNI Inbound (East)
       #muni-inbound.muniContainer

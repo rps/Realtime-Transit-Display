@@ -58,4 +58,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
+poller.init();
+
 module.exports = app;

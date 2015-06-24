@@ -17,7 +17,7 @@ router.get('/', function(req, res1) {
   // routes.forEach(function(route) {
   //   url += ('&stops=' + route.name + '|' + route.stop_id);
   // });
-  poller.update(res1);
+  poller.updateMuni(res1);
 
 
   // $.ajax({

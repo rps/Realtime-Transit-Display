@@ -2,8 +2,13 @@ var request = require('superagent');
 var parseString = require('xml2js').parseString;
 var xmldoc = require('xmldoc');
 
+var storage = {};
+var queryString = "command=predictionsForMultiStops";
+var baseurl = 'http://webservices.nextbus.com/service/publicXMLFeed';
 
-var poll = function(){
+var poller = {};
+
+poller.poll = function(){
   var query = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops&a=sf-muni&stops=5|5689&stops=31|5689&stops=5R|5689";
   request
     .get(query)
@@ -14,81 +19,81 @@ var poll = function(){
 
 var bartAPIKey = 'MW9S-E7SL-26DU-VV8V';
 
-var OutboundMUNIroutes = [
-  { name: 5,     stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-  { name: "5R",  stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-  { name: 21,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-  { name: 31,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-  { name: 38,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-  { name: "38R", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
-  { name: 1,     stop_id: 6314, direction: 'west', stop_location: 'Sacramento & Sansome' },
-  { name: "N",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
-  { name: "J",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
-  { name: "KT",  stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
-  { name: "L",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
-  { name: "M",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
-  { name: "30X", stop_id: 6326, direction: 'north', stop_location: 'California & Sansome' },
-  { name: 41,    stop_id: 6333, direction: 'north', stop_location: 'Sacramento & Sansome' },
-  { name: 10,    stop_id: 6327, direction: 'north', stop_location: 'California & Sansome' }
-];
-
-var InboundMUNIroutes = [
-  { name: "N",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
-  { name: "J",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
-  { name: "KT",  stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
-  { name: "L",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
-  { name: "M",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' }
-];
-
 function parseRoutes(predictions){
-  var result = {};
+  var result = {Inbound: {}, Outbound: {}};
   var currentRouteName;
+  var direction;
   predictions.forEach(function(route){
     currentRouteName = route.attr.routeTag;
-    if(route.firstChild){
-      if(route.firstChild.children){
-        result[currentRouteName] = [];
-        for(var i = 0; i<route.firstChild.children.length && i<3; i++){
-          result[currentRouteName].push(route.firstChild.children[i].attr.minutes);
+    if(route.firstChild && route.firstChild.name === 'direction'){
+      direction = route.firstChild.attr.title.split(' ')[0];
+      if(direction === "Inbound" || direction === "Outbound"){
+        if(route.firstChild.children){
+          result[direction][currentRouteName] = [];
+          for(var i = 0; i<route.firstChild.children.length && i<2; i++){
+            result[direction][currentRouteName].push(route.firstChild.children[i].attr.minutes);
+          }
         }
       }
     }
-  })
+  });
   return result;
 }
 
-function updateMUNI(res1, direction){
-  // var routes = {
-  //   inbound: InboundMUNIroutes,
-  //   outbound: OutboundMUNIroutes
-  // }[direction] || OutboundMUNIroutes.concat(InboundMUNIroutes);
-
-  var agency = '&a=' + 'sf-muni';
-  var queryString = "command=predictionsForMultiStops" + agency;
-
-
-  var baseurl = 'http://webservices.nextbus.com/service/publicXMLFeed';
-
-  //Loop through all routes
-  OutboundMUNIroutes.forEach(function(route) {
-    queryString += ('&stops=' + route.name + '|' + route.stop_id);
-  });
-
-
+function refreshRoutes(){
+  console.log('refreshing');
   request
     .get(baseurl)
     .query(queryString)
     .end(function(err, result){
       var xml = new xmldoc.XmlDocument(result.text);
-      res1.send(parseRoutes(xml.children));
-      // parseString(result.text, function (err, RES) {
-      //   RES.body.predictions.forEach(function(item){
-      //     console.log(item.direction[0].$, '\n');
-      //   });
-      //   // console.log(RES.body.predictions);
-      //   res1.send("stuff")
-      // });
-    })
+      storage = parseRoutes(xml.children);
+    });
+
+  setTimeout(refreshRoutes, 10000);
+}
+
+poller.init = function(){
+  var agency = '&a=' + 'sf-muni';
+  var OutboundMUNIroutes = [
+    { name: 5,     stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "5R",  stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 21,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 31,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 38,    stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: "38R", stop_id: 5689, direction: 'west', stop_location: 'Market & Sansome' },
+    { name: 1,     stop_id: 6314, direction: 'west', stop_location: 'Sacramento & Sansome' },
+    { name: "N",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "J",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "KT",  stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "L",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "M",   stop_id: 6994, direction: 'south', stop_location: 'Montgomery Station' },
+    { name: "30X", stop_id: 6326, direction: 'north', stop_location: 'California & Sansome' },
+    { name: 41,    stop_id: 6333, direction: 'north', stop_location: 'Sacramento & Sansome' },
+    { name: 10,    stop_id: 6327, direction: 'north', stop_location: 'California & Sansome' }
+  ];
+
+  var InboundMUNIroutes = [
+    { name: "N",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "J",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "KT",  stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "L",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' },
+    { name: "M",   stop_id: 5731, direction: 'east', stop_location: 'Montgomery Station' }
+  ];
+
+  queryString+=agency;
+
+  (OutboundMUNIroutes.concat(InboundMUNIroutes)).forEach(function(route) {
+    queryString += ('&stops=' + route.name + '|' + route.stop_id);
+  });
+
+  refreshRoutes();
+};
+
+poller.updateMuni = function(res1, direction){
+  res1.render('index', {title: "test", result: storage})
+  // res1.send(storage);
+};
 
   // $.ajax({
   //   url: url,
@@ -167,9 +172,8 @@ function updateMUNI(res1, direction){
   //     resizeWindow();
   //   }
   // });
-}
 
-module.exports = {update: updateMUNI};
+module.exports = poller;
 
 // https://stackoverflow.com/questions/15478954/sort-array-elements-string-with-numbers-natural-sort
 function strcmp(a, b) {
