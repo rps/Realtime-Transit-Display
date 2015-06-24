@@ -23,6 +23,7 @@ function parseRoutes(predictions){
   var result = {Inbound: {}, Outbound: {}};
   var currentRouteName;
   var direction;
+  var minutes;
   predictions.forEach(function(route){
     currentRouteName = route.attr.routeTag;
     if(route.firstChild && route.firstChild.name === 'direction'){
@@ -30,8 +31,14 @@ function parseRoutes(predictions){
       if(direction === "Inbound" || direction === "Outbound"){
         if(route.firstChild.children){
           result[direction][currentRouteName] = [];
-          for(var i = 0; i<route.firstChild.children.length && i<2; i++){
-            result[direction][currentRouteName].push(route.firstChild.children[i].attr.minutes);
+          for(var i = 0; i<route.firstChild.children.length && result[direction][currentRouteName].length < 2; i++){
+            minutes = route.firstChild.children[i].attr.minutes;
+            if(minutes > 0 && minutes <= 45){
+              result[direction][currentRouteName].push(route.firstChild.children[i].attr.minutes);
+            }
+          }
+          if(result[direction][currentRouteName].length === 0){
+            delete result[direction][currentRouteName];
           }
         }
       }
@@ -94,7 +101,6 @@ poller.init = function(){
 
 poller.updateMuni = function(res1, direction){
   res1.render('index', {title: "test", result: storage})
-  // res1.send(storage);
 };
 
   // $.ajax({

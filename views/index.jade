@@ -13,19 +13,22 @@ block content
         #date.slabtext
     #bart.grid-three
       .advisories
-      h2 BART Northbound
-      #bart-north.bartContainer
-      h2 BART Southbound
-      #bart-south.bartContainer
+
     #muni1.grid-three
       h2 MUNI Outbound (West)
       #muni-outbound.muniContainer
         each times, route in result.Outbound
           div(class='muni', id='muni_#{route}_outbound')
-            .busnumber #{route}
+            h1(class='busnumber') #{route}
             .laterbuses
               each latertimes in times
                 .time #{latertimes}
     #muni2.grid-three
       h2 MUNI Inbound (East)
       #muni-inbound.muniContainer
+        each times, route in result.Inbound
+          div(class='muni', id='muni_#{route}_inbound')
+            h1(class='busnumber') #{route}
+            .laterbuses
+              each latertimes in times
+                .time #{latertimes}
