@@ -16,6 +16,7 @@
     "nconf": "~0.6.9",
     "request": "~2.47.0",
     "serve-favicon": "~2.1.6",
-    "superagent": "^1.2.0"
+    "superagent": "^1.2.0",
+    "xmldoc": "^0.3.1"
   }
 }

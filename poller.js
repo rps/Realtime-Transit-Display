@@ -1,5 +1,4 @@
 var request = require('superagent');
-var parseString = require('xml2js').parseString;
 var xmldoc = require('xmldoc');
 
 var storage = {};
