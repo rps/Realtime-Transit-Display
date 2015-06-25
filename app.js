@@ -7,7 +7,6 @@ var nconf = require('nconf');
 
 var routes = require('./routes/index');
 var wunderground = require('./routes/wunderground');
-var poller = require('./poller.js');
 
 var app = express();
 
@@ -57,7 +56,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-poller.init();
 
 module.exports = app;
