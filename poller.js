@@ -99,7 +99,9 @@ poller.init = function(){
 };
 
 poller.updateMuni = function(res1, direction){
-  res1.render('index', {title: "test", result: storage})
+  setTimeout(function(){
+    res1.render('index', {title: "test", result: storage})
+  }, 2000);
 };
 
   // $.ajax({
