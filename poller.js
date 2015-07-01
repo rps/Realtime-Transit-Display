@@ -99,8 +99,26 @@ poller.init = function(){
 };
 
 poller.updateMuni = function(res1, direction){
-  res1.render('index', {title: "test", result: storage})
+  var storageAsArrays = generateStorageArray(storage);
+  res1.render('index', {title: "test", result: storageAsArrays})
 };
+
+function generateStorageArray(stored){
+  var inbound = [];
+  var outbound = [];
+  var obj;
+  for(var key in stored.Inbound){
+    obj = {};
+    obj[key] = stored.Inbound[key];
+    inbound.push(obj);
+  }
+  for(var key in stored.Outbound){
+    obj = {};
+    obj[key] = stored.Outbound[key];
+    outbound.push(obj);
+  }
+  return {Inbound: inbound.sort(natcmp), Outbound: outbound.sort(natcmp)};
+}
 
   // $.ajax({
   //   url: url,

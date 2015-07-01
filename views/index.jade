@@ -17,18 +17,20 @@ block content
     #muni1.grid-three
       h2 MUNI Outbound (West)
       #muni-outbound.muniContainer
-        each times, route in result.Outbound
-          div(class='muni', id='muni_#{route}_outbound')
-            h1(class='busnumber') #{route}
-            .laterbuses
-              each latertimes in times
-                .time #{latertimes}
+        each routeObj in result.Outbound
+          each times, route in routeObj
+            div(class='muni', id='muni_#{route}_outbound')
+              h1(class='busnumber') #{route}
+              .laterbuses
+                each latertimes in times
+                  .time #{latertimes}
     #muni2.grid-three
       h2 MUNI Inbound (East)
       #muni-inbound.muniContainer
-        each times, route in result.Inbound
-          div(class='muni', id='muni_#{route}_inbound')
-            h1(class='busnumber') #{route}
-            .laterbuses
-              each latertimes in times
-                .time #{latertimes}
+        each routeObj in result.Inbound
+          each times, route in routeObj
+            div(class='muni', id='muni_#{route}_inbound')
+              h1(class='busnumber') #{route}
+              .laterbuses
+                each latertimes in times
+                  .time #{latertimes}
