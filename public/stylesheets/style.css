@@ -19,10 +19,17 @@ h2 {
 .grid-three {
   float: left;
   height: 95%;
-  display: flex;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
   flex-direction: column;
+  -webkit-flex-direction: column;
   align-content: flex-start;
+  -webkit-align-content: flex-start;
 }
 #bart.grid-three {
   width: 20%;
@@ -34,11 +41,19 @@ h2 {
   width: 20%;
 }
 .muniContainer {
-  display: flex;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  flex-direction: column;
   flex-direction: column;
   flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   align-items: center;
+  -webkit-align-items: center;
   align-content: left;
+  -webkit-align-content: left;
 }
 .busnumber {
   width: 100px;
