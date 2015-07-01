@@ -205,6 +205,8 @@ module.exports = poller;
  * Author: Jim Palmer (based on chunking idea from Dave Koelle)
  */
  function naturalSort (a, b) {
+    a = Object.keys(a)[0];
+    b = Object.keys(b)[0];
     var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
         sre = /(^[ ]*|[ ]*$)/g,
         dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/,
