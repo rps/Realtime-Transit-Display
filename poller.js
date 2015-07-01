@@ -104,99 +104,23 @@ poller.updateMuni = function(res1, direction){
 };
 
 function generateStorageArray(stored){
+  var ib = stored.Inbound;
+  var ob = stored.Outbound;
   var inbound = [];
   var outbound = [];
   var obj;
-  for(var key in stored.Inbound){
+  for(var key in ib){
     obj = {};
-    obj[key] = stored.Inbound[key];
+    obj[key] = ib[key]; // stored as objects for jade iteration reasons
     inbound.push(obj);
   }
-  for(var key in stored.Outbound){
+  for(var key in ob){
     obj = {};
-    obj[key] = stored.Outbound[key];
+    obj[key] = ob[key];
     outbound.push(obj);
   }
   return {Inbound: inbound.sort(naturalSort), Outbound: outbound.sort(naturalSort)};
 }
-
-  // $.ajax({
-  //   url: url,
-  //   dataType: 'xml',
-  //   success:function(result){
-  //     var predictions = $(result).find('predictions');
-
-  //     predictions.each(function(i, p){
-  //       var prediction = $(p);
-  //       if(prediction.attr('dirTitleBecauseNoPredictions')){
-  //         return true;
-  //       }
-
-  //       var routeTag = prediction.attr('routeTag'),
-  //           stopTag = prediction.attr('stopTag'),
-  //           directionTitle = prediction.find('direction').attr('title').split(" "),
-  //           direction = directionTitle[0].toLowerCase(), // may be valuable to manually replace with cardinal dir
-  //           destination = {
-  //             inbound: InboundMUNIroutes,
-  //             outbound: OutboundMUNIroutes
-  //           }[direction].filter(function(el){ return el.name == routeTag })[0].stop_location;
-
-  //       var divName = 'muni_' + routeTag.replace(/\s/g, '') + '_' + direction,
-  //           div = $('#'+ divName),
-  //           routeName = routeTag.replace(/\s\D+/g, "<span>$&</span>").replace(/(\d)(L)/g, "$1<span>$2</span>"),
-  //           times = prediction.find('prediction');
-
-  //       if(!div.length) {
-  //         div = $('<div>')
-  //           .addClass('muni')
-  //           .attr('id', divName)
-  //           .appendTo('#muni-' + direction);
-  //       }
-  //       div
-  //         .empty()
-  //         .append($('<div>')
-  //           .addClass('busnumber')
-  //           .html(routeName))
-  //         .append($('<div>').addClass('destinationContainer')
-  //           .append($('<div>')
-  //             .addClass('rotate')
-  //             .html(destination)))
-  //         .append($('<div>')
-  //           .addClass('nextbus time'))
-  //         .append($('<div>')
-  //           .addClass('laterbuses')
-  //           .append($('<div>')
-  //             .addClass('time'))
-  //           .append($('<div>')
-  //             .addClass('time')));
-
-  //       var results = 0,
-  //           idx = 0,
-  //           len = times.length;
-
-  //       while (results < 3 && idx < len){
-  //         //Limit to 3 results, only show times less than 100, don't show results that are 0
-  //         var time = times[idx],
-  //             min = $(time).attr('minutes');
-  //         if(min < 100 && min > 0){
-  //           $('.time', div).eq(results).html(min);
-  //           results++;
-  //         }
-  //         idx++;
-  //       }
-
-  //       //hide if no predictions
-  //       div.toggle((times.length > 0));
-  //     });
-
-  //     $('.muniContainer').each(function(idx, muniContainer){
-  //       $('.muni', muniContainer).sort(natcmp).appendTo(muniContainer);
-  //     });
-
-  //     // Verify data does not run off screen
-  //     resizeWindow();
-  //   }
-  // });
 
 module.exports = poller;
 
@@ -205,7 +129,7 @@ module.exports = poller;
  * Author: Jim Palmer (based on chunking idea from Dave Koelle)
  */
  function naturalSort (a, b) {
-    a = Object.keys(a)[0];
+    a = Object.keys(a)[0]; // capture route name from object's only key
     b = Object.keys(b)[0];
     var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
         sre = /(^[ ]*|[ ]*$)/g,
