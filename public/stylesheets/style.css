@@ -47,7 +47,6 @@ h2 {
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
   flex-direction: column;
-  flex-direction: column;
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
   align-items: center;

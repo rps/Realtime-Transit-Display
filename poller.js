@@ -99,9 +99,7 @@ poller.init = function(){
 };
 
 poller.updateMuni = function(res1, direction){
-  setTimeout(function(){
-    res1.render('index', {title: "test", result: storage})
-  }, 2000);
+  res1.render('index', {title: "test", result: storage})
 };
 
   // $.ajax({
