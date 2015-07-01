@@ -56,14 +56,14 @@ h2 {
   -webkit-align-content: left;
 }
 .busnumber {
-  width: 100px;
+  width: 125px;
   text-align: center;
-  line-height: 100px;
-  border-radius: 100px;
+  line-height: 125px;
+  border-radius: 125px;
   float: left;
 }
 .muni {
-  height: 100px;
+  height: 125px;
   width: 175px;
   padding-right: 10px;
   margin-bottom: 5px;
@@ -74,10 +74,10 @@ h2 {
   background: rgba(0,0,0,0.1);
 }
 .laterbuses .time {
-  height: 50px;
-  width: 50px;
+  height: 62.5px;
+  width: 62.5px;
   text-align: center;
-  line-height: 50px;
+  line-height: 62.5px;
   margin: 0;
   font-size: 20px;
   background: rgba(0,0,0,0.1);
