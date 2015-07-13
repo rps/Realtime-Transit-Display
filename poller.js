@@ -53,8 +53,13 @@ function refreshRoutes(){
     .query(queryString)
     .end(function(err, result){
       if(result.text){
-        var xml = new xmldoc.XmlDocument(result.text);
-        storage = parseRoutes(xml.children);
+        try {
+          var xml = new xmldoc.XmlDocument(result.text);
+          storage = parseRoutes(xml.children);
+        }
+        catch(err) {
+          console.log(err.message);
+        }
       }
     });
 
