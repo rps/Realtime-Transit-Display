@@ -52,7 +52,9 @@ function refreshRoutes(){
     .get(baseurl)
     .query(queryString)
     .end(function(err, result){
-      if(result.text){
+      if(err) {
+        console.log(err.message);
+      } else if(result && result.text) {
         try {
           var xml = new xmldoc.XmlDocument(result.text);
           storage = parseRoutes(xml.children);
